@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "活动内容",
-  "usingComponents": {
-    "u-parse": "/node-modules/uview-ui/components/u-parse/u-parse"
-  }
-}

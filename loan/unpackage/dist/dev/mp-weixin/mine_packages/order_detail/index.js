@@ -161,7 +161,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           } : {}, {
             d: state.type[state.info.status] === 2 && j === state.info.check_logs.length - 1
           }, state.type[state.info.status] === 2 && j === state.info.check_logs.length - 1 ? {
-            e: "642b6436-13-" + i0,
+            e: "73ef3f07-13-" + i0,
             f: common_vendor.p({
               name: "checkmark-circle-fill",
               size: "5vw",

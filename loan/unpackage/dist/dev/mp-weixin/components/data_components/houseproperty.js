@@ -108,7 +108,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           }, !props.showFlag ? {
             e: common_assets._imports_0$9,
             f: common_vendor.o(($event) => changeHouse(index), index),
-            g: "1ad138d3-0-" + i0,
+            g: "09f9b2a4-0-" + i0,
             h: common_vendor.p({
               name: "trash",
               size: "5vw",

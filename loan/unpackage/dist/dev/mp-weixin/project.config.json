@@ -18,7 +18,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.8.4",
+  "libVersion": "3.8.5",
   "appid": "wx603915e7effdbfad",
   "projectname": "loan",
   "condition": {

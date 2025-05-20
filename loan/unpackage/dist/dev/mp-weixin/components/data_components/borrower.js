@@ -83,7 +83,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: common_vendor.t(item.card_number)
           }, !props.showFlag ? {
             d: common_vendor.o(($event) => deleteData(index), index),
-            e: "7b8bf774-0-" + i0,
+            e: "1460df03-0-" + i0,
             f: common_vendor.p({
               name: "trash",
               size: "5vw",

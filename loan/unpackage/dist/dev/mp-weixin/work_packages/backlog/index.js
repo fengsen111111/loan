@@ -147,7 +147,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.type === "person" ? _ctx.$cardUtil(item.card_number) : ""),
-            c: "5d0cf181-3-" + i0,
+            c: "f0244fe0-3-" + i0,
             d: common_vendor.o(($event) => _ctx.$navigateTo("/work_packages/detail/index", {
               id: item.id,
               goods_name: item.goods_name

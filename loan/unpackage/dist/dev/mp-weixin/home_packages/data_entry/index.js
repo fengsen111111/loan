@@ -31,7 +31,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       menus: ["shareAppMessage", "shareTimeline"]
     });
     const state = common_vendor.reactive({
-      step: 4
+      step: 1
     });
     const props = __props;
     common_vendor.index.setStorageSync("goods_id", props.id);

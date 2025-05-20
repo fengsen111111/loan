@@ -38,7 +38,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: common_vendor.t(item.title),
             b: common_vendor.t(item.create_time),
             c: common_vendor.t(item.content),
-            d: "41047589-1-" + i0,
+            d: "6be55c18-1-" + i0,
             e: index
           };
         }),

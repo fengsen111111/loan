@@ -51,6 +51,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       address: ""
       // city_address:''
     });
+    formData.address = common_vendor.index.getStorageSync("fczdz");
+    common_vendor.index.removeStorageSync("fczdz");
     const handleConfirm = (e) => {
       formData.id_card_end_time = e.startDate + " - " + e.endDate;
       state.calenderShow = false;
@@ -214,7 +216,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, state.tips_popup ? {
         w: common_vendor.t(state.tipsText)
       } : {}, {
-        x: common_vendor.sr(uPickerRef, "11136c25-2", {
+        x: common_vendor.sr(uPickerRef, "0754eaf4-2", {
           "k": "uPickerRef"
         }),
         y: common_vendor.o(confirm),

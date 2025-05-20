@@ -120,7 +120,18 @@
       <template #action="{ record }">
 
         <a-space> <a-link @click="showModal(record)">详情 </a-link> </a-space>
-        <a-space v-if="record.status == 'f'"> <a-link  v-if="record.pay_price < record.apply_money" @click="_reOrder(record)">恢复放款 </a-link> </a-space>
+        <a-space v-if="record.status == 'f'"> 
+          <span v-if="record.pay_price < record.apply_money" >
+              <a-popconfirm
+              content="确定要执行该操作 ?"
+              ok-text="确定"
+              cancel-text="取消"
+              @ok="_reOrder(record)"
+            >
+              <a-link> 恢复放款 </a-link>
+            </a-popconfirm>
+          </span>
+        </a-space>
         <a-space> <a-link @click="showModal2(record)">合同详情 </a-link> </a-space>
         <a-space> <a-link @click="showModal1(record)">结清证明</a-link> </a-space>
       </template>
@@ -372,6 +383,7 @@ const showdownload = async (item) => {
 
 //打开弹窗
 const showModal1 = async (item) => {
+  console.log('结清证明',item);
   getSettle(item).then((res: any) => {
     // console.log(res)
     if (res.url) {

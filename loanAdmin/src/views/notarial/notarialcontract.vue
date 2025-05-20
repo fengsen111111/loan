@@ -139,9 +139,15 @@
 
         <template #action="{ record }">
           <a-space>
-
             <a-link :disabled="currentToken === record.token" @click="showModal(record)"> 详情 </a-link>
-            <a-link @click="zuofei(record)"> 作废 </a-link>
+            <a-popconfirm
+              content="确定要执行该操作 ?"
+              ok-text="确定"
+              cancel-text="取消"
+              @ok="zuofei(record)"
+            >
+              <a-link> 作废 </a-link>
+            </a-popconfirm>
           </a-space>
         </template>
       </GiTable>

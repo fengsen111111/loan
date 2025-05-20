@@ -7297,7 +7297,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, state.pub_picker ? {
         I: common_vendor.o(($event) => state.pub_picker = false)
       } : {}, {
-        J: common_vendor.sr(uPickerRef, "6c22766a-6", {
+        J: common_vendor.sr(uPickerRef, "9ab377cc-6", {
           "k": "uPickerRef"
         }),
         K: common_vendor.o(confirm),

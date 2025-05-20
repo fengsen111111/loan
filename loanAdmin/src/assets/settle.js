@@ -72,12 +72,12 @@ const convertCurrency = (money) => {
   return chineseStr
 }
 
-export const getSettle = (data) => {
+export const getSettle = (data) => {  
   return new Promise((resolve, reject) => {
     let title = `<p style="text-align: center;font-size: 30px;margin-bottom: 30px;font-weight: bold">结清证明</p>`
     let info = ``
     data.over_data.persons.forEach((item) => {
-      info += `<p style="text-align: center;margin-bottom: 10px;font-size: 15px">借款人：<span style="border-bottom: solid 1px;padding: 0 5px">${item.name}</span>，证件号：<span style="border-bottom: solid 1px;padding: 0 5px">${item.id_card}</span>；</p>`
+      info += `<p style="text-align: left;margin-bottom: 10px;font-size: 15px">借款人：<span style="border-bottom: solid 1px;padding: 0 5px">${item.name}</span>，证件号：<span style="border-bottom: solid 1px;padding: 0 5px">${item.id_card}</span>；</p>`
     })
     data.over_data.create_time *= 1000
     let year = new Date(data.over_data.create_time).getFullYear()
@@ -93,10 +93,10 @@ export const getSettle = (data) => {
     let current_month = new Date().getMonth() + 1 < 10 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1
     let current_day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate()
     let content = `<p style="text-indent: 2em;margin-bottom: 10px;line-height: 25px;font-size: 15px">于<span style="border-bottom: solid 1px;padding: 0 5px">${year}</span>年<span style="border-bottom: solid 1px;padding: 0 5px">${month}</span>月<span style="border-bottom: solid 1px;padding: 0 5px">${day}</span>日借款人民币<span style="border-bottom: solid 1px;padding: 0 5px">${
-      data.over_data.pay_price
+      data.pay_price?data.pay_price:0
     }</span>元
 （大写：<span style="border-bottom: solid 1px;padding: 0 50px">${convertCurrency(
-      data.over_data.pay_price
+      data.pay_price?data.pay_price:0
     )}</span>），借款合同编号为<span style="border-bottom: solid 1px;padding: 0 5px">${
       data.over_data.contract_num
     }</span>。</p>
@@ -108,7 +108,7 @@ export const getSettle = (data) => {
 
     let html = `${title}${info}${content}${company}${footer}${seal}`
     let body = document.createElement('div')
-    body.style.width = '375px'
+    body.style.width = '380px'
     body.style.margin = '0 auto'
     body.style.padding = '50px'
     body.style.position = 'fixed'

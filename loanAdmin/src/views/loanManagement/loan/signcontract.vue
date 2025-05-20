@@ -121,7 +121,14 @@
 
 			<template #action="{ record }">
 				<a-space> <a-link @click="showModal1(record)">放款</a-link> </a-space>
-				<a-space> <a-link @click="cancelFK(record)">结束放款</a-link> </a-space>
+				<a-popconfirm
+			      	content="确定要执行该操作 ?"
+              ok-text="确定"
+              cancel-text="取消"
+              @ok="cancelFK(record)"
+            >
+              <a-link> 结束放款 </a-link>
+            </a-popconfirm>
 				<a-space> <a-link @click="showModal(record)">详情 </a-link> </a-space>
 				<a-space> <a-link @click="showModal2(record)">合同详情 </a-link> </a-space>
 			</template>

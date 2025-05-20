@@ -127,7 +127,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         o: common_vendor.f(state.notice, (item, index, i0) => {
           return {
             a: common_vendor.t(item.title),
-            b: "c4a842b0-1-" + i0,
+            b: "ed0d090e-1-" + i0,
             c: index,
             d: common_vendor.o(($event) => changeState(item.id), index)
           };
@@ -165,7 +165,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               };
             }),
             j: common_vendor.t(item.special_des),
-            k: "c4a842b0-2-" + i0,
+            k: "ed0d090e-2-" + i0,
             l: common_vendor.o(($event) => _ctx.$navigateTo("/home_packages/details/index", {
               id: item.id,
               type: state.type[item.person_type]

@@ -111,13 +111,15 @@
 		card_image_front: "",
 		card_image_back: "",
 		name: "",
-		mobile:'',
+		mobile: '',
 		id_card: "",
 		id_card_end_time: "",
-		address:'',
+		address: '',
 		// city_address:''
 	})
 
+	formData.address = uni.getStorageSync("fczdz");
+	uni.removeStorageSync("fczdz")
 	const handleConfirm = (e : any) => {
 		formData.id_card_end_time = e.startDate + " - " + e.endDate;
 		state.calenderShow = false
@@ -145,7 +147,7 @@
 
 
 	const nextStep = () => {
-		if (formData.card_image_back === "" ||formData.address === "" || formData.card_image_front === "" || formData.id_card === "" || formData.mobile === "" || formData.id_card_end_time === "" || formData.name === "") {
+		if (formData.card_image_back === "" || formData.address === "" || formData.card_image_front === "" || formData.id_card === "" || formData.mobile === "" || formData.id_card_end_time === "" || formData.name === "") {
 			openTips("资料未填写完成");
 			return;
 		}

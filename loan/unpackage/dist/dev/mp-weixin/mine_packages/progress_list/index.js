@@ -177,7 +177,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             i: "solid 1px " + state.notarization_status[item.notarization_status].color,
             j: state.notarization_status[item.notarization_status].color
           } : {}, {
-            k: "c5c86f1c-1-" + i0,
+            k: "f459707e-1-" + i0,
             l: common_vendor.o(($event) => navTo(item), index),
             m: common_vendor.t(item.goods_name),
             n: common_vendor.t(item.type === "person" ? "个人" : "企业"),

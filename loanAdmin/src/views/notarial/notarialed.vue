@@ -110,7 +110,14 @@
         <template #action="{ record }">
           <a-space>
             <a-link @click="showModal(record)"> 详情 </a-link>
-            <a-link @click="zuofei(record)"> 作废 </a-link>
+            <a-popconfirm
+              content="确定要执行该操作 ?"
+              ok-text="确定"
+              cancel-text="取消"
+              @ok="zuofei(record)"
+            >
+              <a-link> 作废 </a-link>
+            </a-popconfirm>
             <a-link @click="showModal1(record)"> 查看公证书 </a-link>
             <a-link @click="showModal4(record)"> 查看委托书 </a-link>
             <a-link @click="showModal2(record)"> 查看合同 </a-link>

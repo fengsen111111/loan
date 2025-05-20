@@ -112,7 +112,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.type === "person" ? _ctx.$cardUtil(item.card_number) : ""),
-            c: "c58be482-3-" + i0,
+            c: "d908e6e4-3-" + i0,
             d: common_vendor.t(item.goods_name),
             e: common_vendor.t(item.type === "person" ? "个人" : "企业"),
             f: common_vendor.s(item.type === "person" ? "background: #FF8177" : "background: #F3A469"),

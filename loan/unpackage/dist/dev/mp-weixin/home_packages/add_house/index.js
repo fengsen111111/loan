@@ -101,6 +101,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     const navTo = () => {
       common_vendor.index.setStorageSync("ownerArray", formData.owners);
+      common_vendor.index.setStorageSync("fczdz", (formData.city_address + formData.address).replace(/-/g, ""));
       common_vendor.index.navigateTo({
         url: "/home_packages/ownership/index"
       });
@@ -115,7 +116,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       });
     };
     const nextStep = () => {
-      if (formData.address === "" || formData.area === "" || formData.card_number === "" || formData.card_name === "" || formData.house_has_type === "" || formData.house_mortgage_order === "" || formData.house_power_type === "" || formData.house_use_type === "" || formData.owners.length === 0 || formData.price === "") {
+      if (formData.address === "" || formData.area === "" || formData.card_number === "" || formData.house_has_type === "" || formData.house_mortgage_order === "" || formData.house_power_type === "" || formData.house_use_type === "" || formData.owners.length === 0 || formData.price === "") {
         openTips("资料未填写完成");
         return;
       }
@@ -312,7 +313,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return common_vendor.e({
             a: common_vendor.t(i.name),
             b: common_vendor.o(($event) => deleteInfo(j), j),
-            c: "76c98a10-6-" + i0,
+            c: "8a468c72-6-" + i0,
             d: j === 0
           }, j === 0 ? {
             e: common_assets._imports_0$4,
@@ -336,7 +337,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return common_vendor.e({
             a: common_vendor.t(i.name),
             b: common_vendor.o(($event) => deleteInfoTwo(j), j),
-            c: "76c98a10-7-" + i0,
+            c: "8a468c72-7-" + i0,
             d: j === 0
           }, j === 0 ? {
             e: common_assets._imports_0$4,
@@ -369,7 +370,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, state.tips_popup ? {
         T: common_vendor.t(state.tipsText)
       } : {}, {
-        U: common_vendor.sr(uPickerRef, "76c98a10-9", {
+        U: common_vendor.sr(uPickerRef, "8a468c72-9", {
           "k": "uPickerRef"
         }),
         V: common_vendor.o(confirm),

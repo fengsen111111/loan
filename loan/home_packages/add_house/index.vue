@@ -70,7 +70,7 @@
 				</view>
 			</view>
 			<view class="info_item">
-				<view class="label" data-required>权证名称</view>
+				<view class="label">权证名称</view>
 				<view class="value">
 					<input type="text" placeholder="请输入权证名称" v-model="formData.card_name" style="width: 100%;">
 				</view>
@@ -261,6 +261,7 @@
 
 	const navTo = () => {
 		uni.setStorageSync("ownerArray", formData.owners);
+		uni.setStorageSync("fczdz", (formData.city_address+formData.address).replace(/-/g, ""));
 		uni.navigateTo({
 			url: "/home_packages/ownership/index"
 		})
@@ -277,8 +278,8 @@
 	}
 
 	const nextStep = () => {
-		// formData.city_address === "" ||
-		if (formData.address === "" || formData.area === "" || formData.card_number === "" || formData.card_name === "" || formData.house_has_type === "" || 
+		// formData.city_address === "" ||  formData.card_name === "" || 
+		if (formData.address === "" || formData.area === "" || formData.card_number === "" || formData.house_has_type === "" || 
 		formData.house_mortgage_order === "" || formData.house_power_type === "" || 
 		formData.house_use_type === "" || formData.owners.length === 0 || formData.price === "") {
 			openTips("资料未填写完成");

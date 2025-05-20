@@ -1,0 +1,342 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.shopContent {
+  padding: 5.33vw 4vw 0;
+}
+.shopContent > .title {
+  font-weight: bold;
+  font-size: 4.27vw;
+  color: #000000;
+  margin-bottom: 8vw;
+}
+.shopContent .confirm {
+  width: 80vw;
+  height: 12vw;
+  line-height: 12vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #f5e8ae;
+  margin: 0 auto;
+}
+.shopContent .points {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+  text-align: center;
+  margin: 15vw 0 2.67vw;
+}
+.shopContent .item {
+  padding: 2.67vw;
+  background: #FFFFFF;
+  border-radius: 1.33vw;
+  margin-bottom: 2.67vw;
+}
+.shopContent .item > .right {
+  flex: auto;
+}
+.shopContent .item > .right > .title {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #333333;
+  margin-bottom: 2.67vw;
+}
+.shopContent .item > .right > .options {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.shopContent .item > .right > .options > .changeNum {
+  width: 28vw;
+  height: 5.33vw;
+  display: flex;
+  align-items: center;
+  border-radius: 4vw;
+  overflow: hidden;
+}
+.shopContent .item > .right > .options > .changeNum > .num {
+  width: 12vw;
+  height: 100%;
+  background: #F5F5F5;
+  text-align: center;
+  line-height: 5.33vw;
+}
+.shopContent .item > .right > .options > .changeNum > .op_item {
+  width: 8vw;
+  height: 100%;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shopContent .item > image {
+  width: 16.27vw;
+  height: 16.27vw;
+  border-radius: 1.47vw;
+  margin-right: 2.93vw;
+}
+.discountContent {
+  padding: 5.33vw 4vw 0;
+}
+.discountContent > .title {
+  font-weight: bold;
+  font-size: 4.27vw;
+  color: #000000;
+  margin-bottom: 8vw;
+}
+.discountContent .confirm {
+  width: 80vw;
+  height: 12vw;
+  line-height: 12vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #f5e8ae;
+  margin: 0 auto;
+}
+.discountContent .points {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+  text-align: center;
+  margin: 5.33vw 0 2.67vw;
+}
+.discountContent .type {
+  font-weight: 400;
+  font-size: 2.67vw;
+  color: #666666;
+  margin-top: 1.33vw;
+  padding-bottom: 2.67vw;
+  border-bottom: solid 1px #F5F5F5;
+}
+.discountContent .item {
+  padding-bottom: 2.67vw;
+  border-bottom: solid 1px #F5F5F5;
+}
+.discountContent .item > .content {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #ED1805;
+  flex: auto;
+  align-items: flex-end;
+}
+.discountContent .item > .content > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #666666;
+}
+.discountContent .item > .title {
+  font-weight: 400;
+  font-size: 3.73vw;
+  color: #000000;
+  flex: auto;
+}
+.discountContent .item > .title > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #666666;
+}
+.discountContent .item > image {
+  width: 9.6vw;
+  height: 9.6vw;
+  border-radius: 1.33vw;
+  margin-right: 2.67vw;
+}
+.container {
+  height: 100%;
+  min-height: 100vh;
+  background: #F5F5F5;
+  padding-bottom: constant(safe-area-inset-bottom);
+  /*兼容 IOS&gt;11.2*/
+  padding-bottom: env(safe-area-inset-bottom);
+  /*兼容 IOS&gt;11.2*/
+}
+.container > .list {
+  padding: 0 4vw;
+}
+.container > .list > .item {
+  padding: 2.67vw;
+  background: #FFFFFF;
+  border-radius: 1.33vw;
+  margin-bottom: 2.67vw;
+}
+.container > .list > .item > .right {
+  flex: auto;
+}
+.container > .list > .item > .right > .title {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #333333;
+  margin-bottom: 2.67vw;
+}
+.container > .list > .item > .right > .options {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.container > .list > .item > .right > .options > .charge {
+  width: 21.33vw;
+  height: 8vw;
+  line-height: 8vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 4vw;
+  font-weight: 400;
+  font-size: 4vw;
+  color: #f5e8ae;
+}
+.container > .list > .item > image {
+  width: 16.27vw;
+  height: 16.27vw;
+  border-radius: 1.47vw;
+  margin-right: 2.93vw;
+}
+.container > .list > .item_box {
+  padding: 2.67vw;
+  background: #FBFBFB;
+  border-radius: 1.33vw;
+  border: 0.27vw solid #ED1805;
+  margin-bottom: 4vw;
+}
+.container > .list > .item_box > .get > .points {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.container > .list > .item_box > .get > .charge {
+  width: 21.33vw;
+  height: 8vw;
+  background: #000000;
+  border-radius: 4vw;
+  font-weight: 400;
+  font-size: 4vw;
+  color: #f5e8ae;
+}
+.container > .list > .item_box > .type {
+  font-weight: 400;
+  font-size: 2.67vw;
+  color: #666666;
+  margin: 1.33vw 0;
+}
+.container > .list > .item_box > .item {
+  padding-bottom: 2.67vw;
+  border-bottom: solid 1px #F5F5F5;
+}
+.container > .list > .item_box > .item > .content {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #ED1805;
+  flex: auto;
+  align-items: flex-end;
+}
+.container > .list > .item_box > .item > .content > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #666666;
+}
+.container > .list > .item_box > .item > .title {
+  font-weight: 400;
+  font-size: 3.73vw;
+  color: #000000;
+  flex: auto;
+}
+.container > .list > .item_box > .item > .title > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #666666;
+}
+.container > .list > .item_box > .item > image {
+  width: 9.6vw;
+  height: 9.6vw;
+  border-radius: 1.33vw;
+  margin-right: 2.67vw;
+}
+.container > .head {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.container > .head .screen {
+  width: -webkit-fit-content;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4vw;
+}
+.container > .head .screen > .item {
+  white-space: nowrap;
+  margin-right: 4.67vw;
+  font-weight: 500;
+  font-size: 3.2vw;
+  color: #999999;
+}
+.container > .head .screen > .item:last-child {
+  margin-right: 0;
+}
+.container > .head .screen > .active {
+  font-weight: bold;
+  color: #000000;
+}
+.container > .head > .big_screen {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #F5F5F5;
+}
+.container > .head > .big_screen > .item {
+  font-weight: 400;
+  font-size: 3.73vw;
+  color: #666666;
+}
+.container > .head > .big_screen > .active {
+  font-weight: bold;
+  color: #000000;
+}
+.container > .head > .title {
+  height: 10.67vw;
+  background: #FFFFFF;
+  padding: 0 4vw;
+  font-weight: 400;
+  font-size: 3.2vw;
+  color: #EFA246;
+}
+.container > .head > .title > .left {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #333333;
+}
+.container > .head > .title > .left > text {
+  color: #EFA246;
+  margin-left: 1.2vw;
+}
+

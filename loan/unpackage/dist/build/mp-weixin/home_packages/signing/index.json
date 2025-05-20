@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "自助签约",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

@@ -1,0 +1,311 @@
+article,
+aside,
+blockquote,
+body,
+button,
+code,
+dd,
+details,
+div,
+dl,
+dt,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+hr,
+input,
+legend,
+li,
+menu,
+nav,
+ol,
+p,
+pre,
+section,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+  font-family: "PingFang","Microsoft YaHei","SimSun",Arial, Verdana;
+}
+input,
+select,
+textarea {
+  font-size: 100%;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+del {
+  text-decoration: line-through;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+th,
+var {
+  font-style: normal;
+  font-weight: 500;
+}
+ol,
+ul {
+  list-style: none;
+}
+input{
+	outline: 0;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+html,body{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+.Box{
+	padding-top:200px;
+	width: 1000px;
+	height: 50px;
+}
+.ipt_pwd{
+	width: 245px;
+  height: 37px;
+  position: relative;
+  border: 1px solid #333;
+  float: left;
+  margin-right: 20px;
+}
+.pwd-kongjian{
+	width: 177px;
+	height: 37px;
+	float: left;
+}
+.down-KJ{
+	display: block;
+	width: 100%;
+	line-height: 37px;
+	text-align: center;
+	font-size: 14px;
+}
+.holderClass{
+    margin-left: 13px;
+    margin-top: 10px;
+    float: left;
+    top: 8px;
+    color: #ccc;
+    font-size: 13px;
+    display: none;
+}
+.input_search{
+	  position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    width: 160px;
+    height: 30px;
+    margin: 3px 0px 4px 15px;
+    border: none;
+    color: #B7B7B7;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 30px;
+    display: none;
+}
+.hidden{
+	width: 100%;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: bold;
+	height:100px;
+}
+.ipt_pwd_rjp{
+	  background-color: #e60014;
+    float: right;
+    width: 68px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+}
+/*键盘样式*/
+.soft_key{
+	position:absolute;
+	width: 583px;
+	height: 246px;
+	background: #f2f2f2;
+	z-index: 999;
+	border: 1px solid #666;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.soft_head{
+	width: 100%;
+	height: 38px;
+	border-bottom: 1px solid #cecece;
+	position:relative;
+}
+.soft_head_left{
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	float: left;
+	font-size: 0px;
+}
+.soft_head_left img{
+	 vertical-align:top;
+	 margin-top: 3px;
+	 margin-right: 9px;
+	 display:inline-block;
+}
+.soft_head_left span{
+	display:inline-block;
+	font-size: 16px;
+	color: #4e4e4e;
+}
+.soft_head_right{
+	position:absolute;
+	width: 115px;
+	height: 38px;
+	top:0;
+	right:9px;
+}
+.soft_switch span{
+	display: block;
+	width: 115px;
+	height: 28px;
+	line-height: 28px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	text-align: center;
+	margin-top: 6px;
+	cursor: pointer;
+	font-size: 15px;
+	color: #fff;
+}
+.key_main{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding-top:9px ;
+}
+.row1{
+	width:574px;
+	height: 39px;
+	padding-left: 9px;
+}
+.key_main_buttonL{
+	width: 513px;
+	height: 117px;
+	float: left;
+}
+.keyboard_close{
+	width: 61px;
+	height: 110px;
+	color:#fff;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	text-align: center;
+	float: left;
+	cursor:pointer;
+}
+.row2{
+	width:504px;
+	height: 39px;
+	padding-left: 9px;
+}
+.row1 li,.row2 li{
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	text-align: center;
+	margin-right:4px;
+	float: left;
+	font-size: 18px;
+  background: #fff;
+  color: #2d2f31;
+  cursor: pointer;
+}
+.row1 .number_key{
+}
+.row1 li:last-child{
+	margin: 0;
+}
+.row1 .del,.row1 .keyboard_caps{
+	width: 97px;
+	font-size: 15px;
+}
+.del img{
+	margin-top: 12px;
+	margin-left: 16px;
+	width: 20px;
+	height: 8px;
+	float: left;
+}
+.del span{
+	margin-left:9px;
+	font-size: 15px;
+	float: left;
+}
+.keyboard_close img{
+	margin: 15px auto 6px;
+  width: 34px;
+	height: 20px;
+	display: block;
+}
+.keyboard_close span{
+	display: block;
+	width: 20px;
+	height: auto;
+	line-height: 26px;
+	font-size: 15px;
+	margin: 0 auto;
+}
+.key_main_button{
+	width: 583px;
+	height: 117px;
+	clear: both;
+}

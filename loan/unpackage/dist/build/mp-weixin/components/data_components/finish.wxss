@@ -1,0 +1,1 @@
+.finish{height:50vh;display:flex;align-items:center;justify-content:center}.finish>.content{font-weight:400;font-size:3.47vw;color:#333;display:flex;flex-direction:column;align-items:center;justify-content:center}.finish>.content>image{width:60vw;height:60vw}.finish>.content>.title{font-weight:700;font-size:4vw;margin-bottom:1.6vw}

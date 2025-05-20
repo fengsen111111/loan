@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "数据服务授权",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

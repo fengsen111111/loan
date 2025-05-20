@@ -1,0 +1,1165 @@
+<template>
+  <div class="gi_page">
+    <a-card class="general-card">
+      <GiTable
+        row-key="id"
+        :data="dataList"
+        :columns="columns"
+        :loading="loading"
+        :row-selection="rowSelection"
+        @selection-change="selectionChange"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+        :pagination="pagination"
+        :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+        @refresh="search"
+      >
+        <template #custom-left>
+          <a-row class="grid-demo2" :gutter="24">
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">客户姓名</div>
+                <a-input v-model="queryForm.name" placeholder="请输入客户姓名" allow-clear @change="search">
+                  <template #prefix></template>
+                </a-input>
+              </div>
+            </a-col>
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">申请编号</div>
+                <a-input v-model="queryForm.order_num" placeholder="请输入申请编号" allow-clear @change="search">
+                  <template #prefix></template>
+                </a-input>
+              </div>
+            </a-col>
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">申请产品</div>
+                <a-cascader :options="Goods" v-model="queryForm.goods_id" placeholder="请选择申请产品" />
+              </div>
+            </a-col>
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">合同编号</div>
+                <a-input v-model="queryForm.contract_num" placeholder="请输入合同编号" allow-clear @change="search">
+                  <template #prefix></template>
+                </a-input>
+              </div>
+            </a-col>
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">客户手机号码</div>
+                <a-input v-model="queryForm.mobile" placeholder="请输入客户手机号码" allow-clear @change="search">
+                  <template #prefix></template
+                ></a-input>
+              </div>
+            </a-col>
+            <a-col :span="8">
+              <div style="display: flex">
+                <div class="name">客户证件号码</div>
+                <a-input v-model="queryForm.card_number" placeholder="请输入客户证件号码" allow-clear @change="search">
+                  <template #prefix></template>
+                </a-input>
+              </div>
+            </a-col>
+            <a-col :span="12">
+              <div style="display: flex; margin-left: 28px">
+                <div class="name">任务到达时间</div>
+                <DateRangePicker v-model="renTime" @change="search" />
+              </div>
+            </a-col>
+            <a-col :span="12">
+              <a-button @click="reset">重置</a-button>
+            </a-col>
+
+            <a-col :span="8" v-for="(item, i) in listv" :key="i" class="btn" @click="btn(item)">
+              <a-button :type="numbtn == item.id ? 'primary' : 'outline'" long>
+                {{ item.name }}
+                <div class="ntred">{{ item.num }}</div>
+              </a-button>
+            </a-col>
+            <a-col :span="24">
+              <a-button @click="hasOrder" type="primary" v-if="numbtn == 2">批量抢件</a-button>
+              <a-button @click="hasRw" type="primary" v-if="numbtn == 1">批量退回</a-button>
+            </a-col>
+          </a-row>
+        </template>
+        <template #checkStatus="{ record }">
+          {{
+            record.check_status == 'a'
+              ? '资料复核'
+              : record.check_status == 'b'
+              ? '风险审查 '
+              : record.check_status == 'c'
+              ? '合同复核'
+              : ''
+          }}
+        </template>
+
+        <template #action="{ record }">
+          <a-space>
+            <a-link :disabled="currentToken === record.token" v-if="numbtn == 1" @click="showModal1(record)">
+              审核
+            </a-link>
+            <a-link :disabled="currentToken === record.token" v-if="numbtn == 2" @click="renOrder(record)">
+              认领
+            </a-link>
+            <a-link :disabled="currentToken === record.token" @click="showModal(record)"> 详情 </a-link>
+          </a-space>
+        </template>
+      </GiTable>
+    </a-card>
+    <a-modal :visible="open" title="详情" @ok="handleOk" width="80%" @cancel="open = false">
+      <div style="display: flex">
+        <div class="mpdal_left">
+          <div v-for="(item, i) in List" :key="i" style="margin-bottom: 20px" @click="detail(i)">
+            <a-button style="width: 150px" type="primary" v-if="i == num">{{ item.name }}</a-button>
+            <a-button v-else style="width: 150px">{{ item.name }}</a-button>
+          </div>
+        </div>
+        <div class="mpdal_right">
+          <div v-if="num == 0" style="width: 100%">
+            <a-row class="grid-demo">
+              <a-col :span="24">
+                <div style="display: flex; margin-bottom: -40px">
+                  <span>证件信息</span>
+                  <div class="idcard">
+                    <div class="idcarda" @click="handleClickFile(detailCon?.order_material?.card_image_front)">
+                      <a-image width="100" :src="detailCon?.order_material?.card_image_front" alt="" />
+                      <div>证件正面照</div>
+                    </div>
+                    <div class="idcarda" @click="handleClickFile(detailCon?.order_material?.card_image_back)">
+                      <a-image width="100" :src="detailCon?.order_material?.card_image_back" alt="" />
+                      <div>证件反面照</div>
+                    </div>
+                  </div>
+                </div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>申请件编号</span> MP2023083002001</div>
+              </a-col>
+              <a-col :span="12">
+                <div>
+                  <span>所属商户</span> {{ detailCon?.order_material?.type == 'person' ? '个人贷款' : '企业贷款 ' }}
+                </div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>录单人</span>{{ detailCon?.order_material?.name }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>申请产品</span>{{ detailCon?.order_material?.name }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>客户姓名</span>{{ detailCon?.order_material?.name }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>手机号码</span>{{ detailCon?.order_material?.mobile }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>客户证件类型</span>身份证</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>客户证件号码</span>{{ detailCon?.order_material?.card_number }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>客户证件有效期</span> {{ detailCon?.order_material?.id_card_end_time }}</div>
+              </a-col>
+              <a-col :span="12">
+                <div><span>户籍地址</span>{{ detailCon?.order_material?.name }}</div>
+              </a-col>
+            </a-row>
+          </div>
+          <div v-if="num == 1" style="width: 100%">
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['1']" :accordion="true">
+                <a-collapse-item header="其他信息" key="1">
+                  <a-row class="grid-demo1">
+                    <a-col :span="8">
+                      <div><span>婚姻状况</span>{{ detailCon?.order_material?.company_mobile }}</div>
+                    </a-col>
+
+                    <a-col :span="8">
+                      <div><span>最高学历</span> {{ detailCon?.order_material?.marriage }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>最高学位</span>{{ detailCon?.order_material?.degree }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>职业</span>{{ detailCon?.order_material?.occupation }}</div>
+                    </a-col>
+                    <a-col :span="8" v-if="detailCon?.order_material?.email">
+                      <div><span>电子邮箱</span>{{ detailCon?.order_material?.email }}</div>
+                    </a-col>
+                  </a-row>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+            <a-space direction="vertical" :style="{ width: '100%' }" style="margin-top: 20px">
+              <a-collapse :default-active-key="['2']" :accordion="true">
+                <a-collapse-item header="工作信息" key="2">
+                  <a-row class="grid-demo1">
+                    <a-col :span="8">
+                      <div><span>公司名称</span>{{ detailCon?.order_material?.company_name }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>所属行业</span>{{ detailCon?.order_material?.industry }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>职务</span> {{ detailCon?.order_material?.post }}</div>
+                    </a-col>
+
+                    <a-col :span="8">
+                      <div><span>职称</span>{{ detailCon?.order_material?.professional_title }}</div>
+                    </a-col>
+                  </a-row>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+
+            <a-space direction="vertical" :style="{ width: '100%' }" style="margin-top: 20px">
+              <a-collapse :default-active-key="['3']" :accordion="true">
+                <a-collapse-item header="联系人信息" key="3">
+                  <a-row class="grid-demo1">
+                    <a-col :span="8">
+                      <div><span>紧急联系人姓名 </span>{{ detailCon?.order_material?.emergency_contact_name }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span> 紧急联系人电话 </span>{{ detailCon?.order_material?.emergency_contact_mobile }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div>
+                        <span> 紧急联系人与借贷人关系 </span>
+                        {{ detailCon?.order_material?.emergency_contact_relationship }}
+                      </div>
+                    </a-col>
+
+                    <a-col :span="8">
+                      <div><span>其他联系人姓名 </span>{{ detailCon?.order_material?.other_contact_name }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>其他联系人电话 </span>{{ detailCon?.order_material?.other_contact_mobile }}</div>
+                    </a-col>
+                  </a-row>
+                  <!-- <GiTable
+                    row-key="id"
+                    :data="dataList1"
+                    :columns="columns1"
+                    :loading="loading"
+                    :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+                    :pagination="false"
+                    :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+                  ></GiTable>-->
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+          </div>
+          <div v-if="num == 2" style="width: 100%">
+            <a-collapse
+              v-for="(item, i) in detailCon.order_material?.other_persons"
+              :key="i"
+              :default-active-key="[i]"
+              :accordion="true"
+            >
+              <a-collapse-item :header="item.name" :key="i">
+                <a-row class="grid-demo">
+                  <a-col :span="24">
+                    <div style="display: flex; margin-bottom: -40px">
+                      <span>证件信息</span>
+                      <div class="idcard">
+                        <div class="idcarda" @click="handleClickFile(item.person_id_card_image_front)">
+                          <a-image width="100" :src="item.person_id_card_image_front" alt="" />
+                          <div>证件正面照</div>
+                        </div>
+                        <div class="idcarda" @click="handleClickFile(item.person_id_card_image_back)">
+                          <a-image width="100" :src="item.person_id_card_image_back" alt="" />
+                          <div>证件反面照</div>
+                        </div>
+                      </div>
+                    </div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>共同申请人类型</span>{{ item?.type == 'person' ? '个人贷款' : '企业贷款 ' }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>姓名</span>{{ item.name }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>证件类型</span>{{ item.card_type }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>证件号码</span>{{ item.card_number }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>证件有效期</span>{{ item.person_id_card_end_time }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>手机号码</span>{{ item.mobile }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>与申请人关系</span>{{ item.person_relationship }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>婚姻状况</span>{{ item.person_marriage }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>离异方式</span>{{ item.name }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>现居住城市</span>{{ item.person_city_address }}</div>
+                  </a-col>
+                  <a-col :span="12">
+                    <div><span>街道地址</span>{{ item.person_address }}</div>
+                  </a-col>
+                </a-row>
+              </a-collapse-item>
+            </a-collapse>
+          </div>
+          <div v-if="num == 3" style="width: 100%">
+            <GiTable
+              row-key="id"
+              :data="detailCon?.order_material?.guarantee_persons"
+              :columns="columns2"
+              :loading="loading"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+              :pagination="false"
+              :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+            >
+              <template #personidcardimagefront="{ record }">
+                <a-image width="100" :src="record.person_id_card_image_front" alt="" />
+              </template>
+              <template #nperson_idcardimageback="{ record }">
+                <a-image width="100" :src="record.person_id_card_image_back" alt=""
+              /></template>
+              <template #companylicenseimage="{ record }">
+                <a-image width="100" :src="record.company_license_image" alt=""
+              /></template>
+            </GiTable>
+          </div>
+          <div v-if="num == 4" style="width: 100%">
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['4']" :accordion="true">
+                <a-collapse-item header="贷款信息" key="4">
+                  <a-row class="grid-demo1">
+                    <a-col :span="8">
+                      <div><span>合同签署地</span>{{ detailCon?.order_material?.sign_address }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>申请贷款额度(元)</span>{{ detailCon?.order_material?.apply_money }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>签约具体位置</span>{{ detailCon?.order_material?.company_mobile }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>期数类型 </span>{{ detailCon?.order_material?.loan_time_type }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>申请期数</span>{{ detailCon?.order_material?.loan_time }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div>
+                        <span>借款期限</span
+                        >{{ detailCon?.order_material?.start_time + '=' + detailCon?.order_material?.end_time }}
+                      </div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>还款方式</span> {{ detailCon?.order_material?.repayment_type }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>借款用途</span> {{ detailCon?.order_material?.use_type }}</div>
+                    </a-col>
+                    <a-col :span="8">
+                      <div><span>合同执行年利率(%)</span>{{ detailCon?.order_material?.loan_rate }}</div>
+                    </a-col>
+                  </a-row>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+          </div>
+          <div v-if="num == 5" style="width: 100%">
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse
+                v-for="(item, k) in detailCon?.order_material?.houses"
+                :key="k"
+                :default-active-key="[k]"
+                :accordion="true"
+              >
+                <a-collapse-item header="抵质押物信息 - 房产" :key="k">
+                  <a-row class="grid-demo1">
+                    <a-col :span="12">
+                      <div>
+                        <span>产权所有人</span>
+
+                        <p v-for="(itemg, l) in item.owners" :key="l" style="display: inline">{{ itemg.name + ' ' }}</p>
+                      </div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>不动产证书编号</span>{{ item.card_number }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>房屋坐落城市 </span>{{ item.city_address }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>街道地址及门牌号 </span>{{ item.address }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>抵押顺位</span>{{ item.house_mortgage_order }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>房屋建筑面积（㎡） </span>{{ item.area }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span> 使用现状</span> {{ item.house_use_type }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>共有形式</span> {{ item.house_power_type }}</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>持有方式</span>{{ item.house_use_type }}</div>
+                    </a-col>
+
+                    <a-col :span="12">
+                      <div><span>评估价格（元）</span>{{ item.price }}</div>
+                    </a-col>
+                  </a-row>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+          </div>
+          <div v-if="num == 6" style="width: 100%">
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['5']" :accordion="true">
+                <a-collapse-item header="助贷方风险审查" key="5">
+                  <template #extra>
+                    <a-button type="primary" size="mini" @click.stop="installContatrt">批量下载</a-button>
+                  </template>
+                  <GiTable
+                    row-key="id"
+                    :data="dataList4"
+                    :columns="columns4"
+                    :loading="loading"
+                    :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+                    :pagination="false"
+                    :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+                  ></GiTable>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['6']" :accordion="true">
+                <a-collapse-item header="助贷方配资" key="6">
+                  <GiTable
+                    row-key="id"
+                    :data="dataList5"
+                    :columns="columns5"
+                    :loading="loading"
+                    :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+                    :pagination="false"
+                    :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+                  ></GiTable>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['7']" :accordion="true">
+                <a-collapse-item header="合同/协议" key="7">
+                  <GiTable
+                    row-key="id"
+                    :data="dataList6"
+                    :columns="columns6"
+                    :loading="loading"
+                    :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+                    :pagination="false"
+                    :disabledTools="['fullscreen', 'refresh', 'size', 'setting']"
+                  ></GiTable>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['8']" :accordion="true">
+                <a-collapse-item header="风险审查意见" key="8">
+                  <a-row class="grid-demo1">
+                    <a-col :span="12">
+                      <div><span>是否在线公证</span>否</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>诉讼解决方式</span> 诉讼解决</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>抵质押顺序 </span> -</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>合同执行年利率(%) </span>24</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>业务合作模式 </span>预付债权购买款模式</div>
+                    </a-col>
+                    <a-col :span="12">
+                      <div><span>债权承接方 </span> 四川蜀弘汇信企业管理咨询有限公司</div>
+                    </a-col>
+                  </a-row>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+          </div>
+          <div v-if="num == 7">
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['9']" :accordion="true">
+                <a-collapse-item header="申请人" key="9">
+                  <a-space direction="vertical" :style="{ width: '100%' }">
+                    <a-collapse :default-active-key="['10']" :accordion="true">
+                      <a-collapse-item :header="`${detailCon?.order_material?.name}（申请人）`" key="10">
+                        <div class="grid-demo">
+                          <div>
+                            <div class="idcard">
+                              <div class="idcarda" @click="handleClickFile">
+                                <a-image width="100" :src="detailCon?.order_material?.card_image_front" alt="" />
+                                <div>证件正面照</div>
+                              </div>
+                              <div class="idcarda" @click="handleClickFile">
+                                <a-image width="100" :src="detailCon?.order_material?.card_image_back" alt="" />
+                                <div>证件反面照</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a-collapse-item>
+                    </a-collapse>
+                  </a-space>
+                  <div v-for="(item, i) in detailCon?.order_material?.other_persons" :key="i">
+                    <a-space direction="vertical" :style="{ width: '100%' }" v-if="item.type == 'person'">
+                      <a-collapse :default-active-key="['11']" :accordion="true">
+                        <a-collapse-item :header="`${item.name}（共同申请人）`" key="11">
+                          <div class="grid-demo">
+                            <div>
+                              <div class="idcard">
+                                <div class="idcarda">
+                                  <a-image width="100" :src="item.person_id_card_image_front" alt="" />
+                                  <div>证件正面照</div>
+                                </div>
+                                <div class="idcarda">
+                                  <a-image width="100" :src="item.person_id_card_image_back" alt="" />
+                                  <div>证件反面照</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a-collapse-item>
+                      </a-collapse>
+                    </a-space>
+                    <a-space direction="vertical" :style="{ width: '100%' }" v-else>
+                      <a-collapse :default-active-key="['11']" :accordion="true">
+                        <a-collapse-item :header="`${item.name}（共同申请人）`" key="11">
+                          <div class="grid-demo">
+                            <div>
+                              <div class="idcard">
+                                <div class="idcarda">
+                                  <a-image width="100" :src="item.company_license_imag" alt="" />
+                                  <div>证件正面照</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a-collapse-item>
+                      </a-collapse>
+                    </a-space>
+                  </div>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+
+            <a-space direction="vertical" :style="{ width: '100%' }">
+              <a-collapse :default-active-key="['12']" :accordion="true">
+                <a-collapse-item header="其他影像" key="12">
+                  <div>合同</div>
+                  <div style="display: flex; margin-bottom: 10px">
+                    <div class="idcard">
+                      <div class="idcarda" v-for="(item, i) in detailCon.order_material?.house_contract_images">
+                        <a-image width="100" :src="item" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>抵押</div>
+                  <div style="display: flex; margin-bottom: 10px">
+                    <div class="idcard">
+                      <div class="idcarda" v-for="(item, i) in detailCon.order_material?.house_images">
+                        <a-image width="100" :src="item" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>支付</div>
+                  <div style="display: flex; margin-bottom: 10px">
+                    <div class="idcard">
+                      <div class="idcarda" v-for="(item, i) in detailCon.order_material?.house_pay_images">
+                        <a-image width="100" :src="item" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </a-collapse-item>
+              </a-collapse>
+            </a-space>
+          </div>
+          <div v-if="num == 8">
+            <a-steps type="arrow" :current="detailCon?.check_logs?.length" style="width: 100%">
+              <a-step v-for="(iu, i) in detailCon?.check_logs" :key="i" :description="iu.handler_name">{{
+                iu.check_process == 'a'
+                  ? '资料复核'
+                  : iu.check_process == 'b'
+                  ? '风险审查 '
+                  : iu.check_process == 'c'
+                  ? '合同复核'
+                  : ''
+              }}</a-step>
+            </a-steps>
+          </div>
+        </div>
+      </div>
+      <template #footer>
+        <a-button key="back" @click="open = false">取消</a-button>
+        <a-button key="submit" type="primary" @click="handleOk">关闭</a-button>
+      </template>
+    </a-modal>
+    <a-modal :visible="open1" title="审核订单" @ok="handleOk" width="80%" @cancel="open1 = false">
+      <div>
+        <a-row class="grid-demo1">
+          <a-col :span="24">
+            <div><span>合同编号</span>{{ detailCon?.contract_num }}</div>
+          </a-col>
+          <a-col :span="24">
+            <div>
+              <span>驳回理由 </span>
+              <a-textarea
+                placeholder="请输入驳回理由"
+                v-model="reject_des"
+                :max-length="255"
+                allow-clear
+                show-word-limit
+              />
+            </div>
+          </a-col>
+        </a-row>
+      </div>
+      <template #footer>
+        <a-button key="back" @click="handleOk2">取消</a-button>
+        <a-button key="back " type="primary" @click="CheckOrder('a')">审核通过</a-button>
+        <a-button key="back " type="warning" @click="CheckOrder('b')">审核拒绝 </a-button>
+      </template>
+    </a-modal>
+  </div>
+</template>
+
+<script setup lang="ts">
+import {
+  storeGetOrderList,
+  checkerOrderSta,
+  storeCheckOrder,
+  storeGetGoodsList,
+  storeGetOrderDetail,
+  storeHasOrder
+} from '@/apis'
+import { Message, Modal } from '@arco-design/web-vue'
+import type { TableInstanceColumns } from '@/components/GiTable/type'
+import DateRangePicker from '@/components/DateRangePicker/index.vue'
+import { useUserStore } from '@/stores'
+import { useTable } from '@/hooks'
+import { isMobile } from '@/utils'
+import has from '@/utils/has'
+import { api as viewerApi } from 'v-viewer'
+defineOptions({ name: 'MonitorOnline' })
+const open = ref<boolean>(false)
+const open1 = ref<boolean>(false)
+const userStore = useUserStore()
+const detailCon = ref({})
+const selectedKeys = ref([])
+const renTime = ref([])
+const currentToken = userStore.token
+const columns: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '申请编号', align: 'center', dataIndex: 'contract_num', ellipsis: true, tooltip: true },
+  { title: '当前环节', align: 'center', slotName: 'checkStatus', ellipsis: true, tooltip: true },
+  { title: '客户姓名', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '客户证件号码', align: 'center', dataIndex: 'card_number', ellipsis: true, tooltip: true },
+  { title: '客户手机号码', align: 'center', dataIndex: 'auth_mobile', ellipsis: true, tooltip: true },
+  { title: '申请产品', align: 'center', dataIndex: 'goods_name', ellipsis: true, tooltip: true },
+  { title: '任务到达时间', align: 'center', dataIndex: 'create_time', ellipsis: true, tooltip: true },
+
+  {
+    title: '操作',
+    slotName: 'action',
+    align: 'center',
+    fixed: 'right',
+    show: true
+  }
+]
+const columns1: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+
+  { title: '联系人姓名', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '联系人电话', align: 'center', dataIndex: 'mobile', ellipsis: true, tooltip: true },
+  { title: '联系人关系', align: 'center', dataIndex: 'relationshipLV', ellipsis: true, tooltip: true },
+  { title: '联系人类型', align: 'center', dataIndex: 'linkmanTypeLV', width: 180 }
+]
+const columns2: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1)
+  },
+  { title: '借贷人的手机号', align: 'center', dataIndex: 'mobile', ellipsis: true, tooltip: true },
+  { title: '担保人类型 ', align: 'center', slotName: 'type', ellipsis: true, tooltip: true },
+  { title: '融担方名称', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  {
+    title: '个人身份证号 / 企业统一社会信用代码 ',
+    align: 'center',
+    dataIndex: 'card_number',
+    ellipsis: true,
+    tooltip: true
+  },
+
+  {
+    title: '身份证正面照 url  ',
+    align: 'center',
+    slotName: 'personidcardimagefront',
+    ellipsis: true,
+    tooltip: true
+  },
+  { title: '身份证反面照片 url  ', align: 'center', slotName: 'personidcardimage_back', width: 180 },
+  {
+    title: '身份证号有效期  ',
+    align: 'center',
+    dataIndex: 'person_idcard_end_time',
+    width: 180,
+    ellipsis: true,
+    tooltip: true
+  },
+  {
+    title: '与借贷人关系   ',
+    align: 'center',
+    dataIndex: 'person_relationship',
+    width: 180,
+    ellipsis: true,
+    tooltip: true
+  },
+  { title: '婚姻状态  ', align: 'center', dataIndex: 'person_marriage', ellipsis: true, width: 180, tooltip: true },
+  { title: '居住城市  ', align: 'center', dataIndex: 'person_city_address', ellipsis: true, width: 180, tooltip: true },
+  { title: '详细地址', align: 'center', dataIndex: 'person_address', ellipsis: true, width: 180, tooltip: true },
+  {
+    title: '营业执照照片 url ',
+    align: 'center',
+    slotName: 'companylicenseimage',
+    width: 180,
+    ellipsis: true,
+    tooltip: true
+  },
+  { title: '营业期限   ', align: 'center', dataIndex: 'company_end_time', ellipsis: true, width: 180, tooltip: true },
+  { title: '办公城市  ', align: 'center', dataIndex: 'company_work_city', ellipsis: true, width: 180, tooltip: true },
+  {
+    title: '办公地址   ',
+    align: 'center',
+    dataIndex: 'company_work_address',
+    ellipsis: true,
+    width: 180,
+    tooltip: true
+  },
+  { title: '法人姓名  ', align: 'center', dataIndex: 'company_leader_name', ellipsis: true, width: 180, tooltip: true },
+  {
+    title: '法人与借贷人关系   ',
+    align: 'center',
+    width: 180,
+    dataIndex: 'company_leader_relationship',
+    ellipsis: true,
+    tooltip: true
+  },
+
+  {
+    title: '法人证件类型   ',
+    align: 'center',
+    width: 180,
+    dataIndex: 'company_leader_card_type',
+    ellipsis: true,
+    tooltip: true
+  },
+  {
+    title: '法人证件号码  ',
+    width: 180,
+    align: 'center',
+    dataIndex: 'company_leader_card_number',
+    ellipsis: true,
+    tooltip: true
+  },
+
+  { title: '操作', align: 'center', dataIndex: 'linkmanTypeLV', width: 180 }
+]
+const columns3: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '客户名称', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '证件号码', align: 'center', dataIndex: 'mobile', ellipsis: true, tooltip: true },
+  { title: '手机号码', align: 'center', dataIndex: 'relationshipLV', ellipsis: true, tooltip: true },
+  { title: '状态', align: 'center', dataIndex: 'linkmanTypeLV', ellipsis: true, tooltip: true },
+  { title: '失败原因', align: 'center', dataIndex: 'linkmanTypeLV1', ellipsis: true, tooltip: true },
+  { title: '操作', align: 'center', dataIndex: 'linkmanTypeLV2', ellipsis: true, tooltip: true }
+]
+const columns4: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+
+  { title: '持牌机构编号', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '持牌机构名称', align: 'center', dataIndex: 'mobile', ellipsis: true, tooltip: true },
+  { title: '备注', align: 'center', dataIndex: 'relationshipLV', ellipsis: true, tooltip: true }
+]
+const columns5: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '出助贷方编码', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '出助贷方名称', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+  { title: '出资金额(元)', align: 'center', dataIndex: 'cz', ellipsis: true, tooltip: true }
+]
+
+const columns6: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+
+  { title: '合同/协议名称', align: 'center', dataIndex: 'name', ellipsis: true, tooltip: true },
+
+  { title: '操作', align: 'center', dataIndex: 'linkmanTypeLV', width: 180 }
+]
+const columns7: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '当前环节', align: 'center', dataIndex: 'nodeName', ellipsis: true, tooltip: true },
+  { title: '任务处理人', align: 'center', dataIndex: 'assignee', ellipsis: true, tooltip: true },
+  { title: '审批意见', align: 'center', dataIndex: 'opinion', ellipsis: true, tooltip: true },
+  { title: '审批备注', align: 'center', dataIndex: 'remark', ellipsis: true, tooltip: true },
+  { title: '审批开始时间', align: 'center', dataIndex: 'startTime', ellipsis: true, tooltip: true },
+  { title: '审批处理时间', align: 'center', dataIndex: 'endTime', ellipsis: true, tooltip: true }
+]
+const listv = ref([
+  {
+    name: '待办队列',
+    id: 1,
+    type: 'b',
+    num: 0
+  },
+  {
+    name: '待抢队列',
+    id: 2,
+    type: 'a',
+    num: 0
+  },
+  {
+    name: '已办队列',
+    id: 3,
+    type: 'c',
+    num: 0
+  }
+])
+const position = ref('right')
+const num = ref(0)
+const numbtn = ref(1)
+const reject_des = ref('')
+const queryForm = reactive<OnlineUserQuery>({
+  status: 'b',
+  goods_id: '',
+  name: '',
+  card_number: '',
+  mobile: '',
+  order_num: '',
+  contract_num: '',
+  start_time: renTime.value.length > 0 ? renTime.value[0] : '',
+  end_time: renTime.value.length > 0 ? renTime.value[1] : ''
+})
+const detail = (i) => {
+  num.value = i
+}
+const {
+  tableData: dataList,
+  loading,
+  pagination,
+  search
+} = useTable(
+  (p) =>
+    storeGetOrderList({
+      post_params: {
+        ...queryForm,
+        currentPage: p.page,
+        perPage: p.size
+      }
+    }),
+  { immediate: true }
+)
+
+const List = reactive([
+  { name: '客户基本信息' },
+  { name: '客户详细信息' },
+  { name: '共同申请人' },
+  { name: '融担方信息' },
+  { name: '贷款信息' },
+  { name: '抵质押物信息' },
+  { name: '风险审查信息' },
+  { name: '影像信息' },
+  { name: '审批历史' }
+])
+const rowSelection = reactive({
+  type: 'checkbox',
+  showCheckedAll: true,
+  onlyCurrent: false
+})
+function btn(item) {
+  numbtn.value = item.id
+  queryForm.status = item.type
+  dataList.value = []
+  search()
+}
+const Goods = ref([])
+function selectionChange(e) {
+  selectedKeys.value = e
+}
+//获取
+const checkerOrder = async () => {
+  try {
+    const res = await checkerOrderSta({})
+    // console.log(res, 'eeeeeeeeeee')
+    listv.value[0].num = res.data.status_c_number
+    listv.value[1].num = res.data.status_b_number
+    listv.value[2].num = res.data.complete_number
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+//打开弹窗
+const showModal1 = (item) => {
+  detailCon.value = item
+  open1.value = true
+}
+const GoodsList = async () => {
+  try {
+    const res = await storeGetGoodsList()
+    console.log(res.data.datas, 'eeeeeeeeeee')
+    Goods.value = res.data.datas
+
+    return true
+  } catch (error) {
+    return false
+  }
+}
+//审核订单
+const CheckOrder = async (item) => {
+  if (reject_des.value.length == 0 && item == 'b') return Message.error('请输入拒绝理由')
+  try {
+    const res = await storeCheckOrder({
+      post_params: { order_ids: [detailCon.value.id], status: item, reject_des: reject_des.value }
+    })
+    open1.value = false
+    search()
+    Message.success('审核订单成功')
+    checkerOrder()
+    reject_des.value = ''
+    return true
+  } catch (error) {
+    return false
+  }
+}
+//批量退回
+const hasRw = async (item) => {
+  if (selectedKeys.value.length == 0 && item == 'b') return Message.error('请选择批量退回数据')
+  try {
+    const res = await storeCheckOrder({
+      post_params: { order_ids: selectedKeys.value, status: 'b' }
+    })
+    open1.value = false
+    search()
+    Message.success('审核订单成功')
+    checkerOrder()
+    return true
+  } catch (error) {
+    return false
+  }
+}
+//合同批量下载
+const installContatrt = () => {}
+//抢单
+const hasOrder = async () => {
+  if (selectedKeys.value.length == 0) return
+
+  try {
+    const res = await storeHasOrder({
+      post_params: { order_ids: selectedKeys.value }
+    })
+
+    Message.success('抢单成功')
+    search()
+    checkerOrder()
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+//认领
+const renOrder = async (item) => {
+  try {
+    const res = await storeHasOrder({
+      post_params: { order_ids: [item.id] }
+    })
+
+    Message.success('抢单成功')
+    search()
+    checkerOrder()
+    return true
+  } catch (error) {
+    return false
+  }
+}
+// 点击文件
+const handleClickFile = (item) => {
+  const imgList = reactive([item])
+  // const index = imgList.findIndex((i) => i === item.url)
+  if (imgList.length) {
+    viewerApi({
+      // options: {
+      //   initialViewIndex: index
+      // },
+      images: imgList
+    })
+  }
+}
+// 重置
+const reset = () => {
+  queryForm.nickname = undefined
+  queryForm.status = queryForm.status
+  queryForm.goods_id = undefined
+  queryForm.name = undefined
+  queryForm.card_number = undefined
+  queryForm.mobile = undefined
+  queryForm.order_num = undefined
+  queryForm.contract_num = undefined
+  queryForm.start_time = undefined
+  queryForm.end_time = undefined
+  search()
+}
+//打开弹窗
+const showModal = async (item) => {
+  const data = await storeGetOrderDetail({
+    post_params: {
+      order_id: item.id
+    }
+  })
+
+  data.data.check_logs.reverse()
+
+  detailCon.value = data.data
+  open.value = true
+}
+
+//关闭
+const handleOk = () => {
+  loading.value = false
+  open.value = false
+}
+const handleOk2 = () => {
+  reject_des.value = ''
+  open1.value = false
+}
+onMounted(() => {
+  checkerOrder()
+  GoodsList()
+})
+</script>
+
+<style lang="scss" scoped>
+.name {
+  width: 130px;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: 800;
+  margin-top: 8px;
+}
+.grid-demo2 .arco-col {
+  margin-bottom: 10px;
+}
+
+.ntred {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  right: 30px;
+}
+.mpdal_left {
+  width: 100px;
+  margin-right: 90px;
+}
+.mpdal_right {
+  width: calc(100% - 200px);
+}
+.grid-demo {
+  div {
+    margin-bottom: 20px;
+  }
+  span {
+    text-align: right;
+    font-weight: 800;
+    margin-right: 30px;
+  }
+  .idcard {
+    display: flex;
+    margin-left: 50px;
+    .idcarda {
+      text-align: center;
+      margin-right: 50px;
+      img {
+        width: 120px;
+        height: 100px;
+      }
+    }
+  }
+}
+
+.grid-demo1 {
+  div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  span {
+    text-align: right;
+    font-weight: 800;
+    margin-right: 30px;
+  }
+}
+</style>

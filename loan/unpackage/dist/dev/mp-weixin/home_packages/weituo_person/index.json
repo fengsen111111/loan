@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "新增受托人",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "订单详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-read-more": "../../node-modules/uview-plus/components/u-read-more/u-read-more",
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "information": "../../components/data_components/information",
+    "information1": "../../components/data_components/information1",
+    "detailed": "../../components/data_components/detailed",
+    "detailed1": "../../components/data_components/detailed1",
+    "borrowing": "../../components/data_components/borrowing",
+    "borrower": "../../components/data_components/borrower",
+    "rongdan": "../../components/data_components/rongdan",
+    "houseproperty": "../../components/data_components/houseproperty",
+    "capture": "../../components/data_components/capture",
+    "otherinfo": "../../components/data_components/otherinfo",
+    "navbar": "../../components/navbar"
+  }
+}

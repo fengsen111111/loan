@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "数据服务授权",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-checkbox": "../../node-modules/uview-plus/components/u-checkbox/u-checkbox",
+    "u-checkbox-group": "../../node-modules/uview-plus/components/u-checkbox-group/u-checkbox-group",
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

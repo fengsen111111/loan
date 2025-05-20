@@ -1,0 +1,191 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.container {
+  min-height: 100vh;
+  background: #F6F7FB;
+}
+.container .tips_popup {
+  position: fixed;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54.13vw;
+  height: 8vw;
+  background: rgba(102, 102, 102, 0.8);
+  border-radius: 1.33vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 3.47vw;
+  color: #FFFFFF;
+}
+.container .picker-selected {
+  height: 20vw;
+}
+.container .picker-selected:before {
+  content: "";
+  top: 0;
+  position: absolute;
+  border: none;
+}
+.container .picker-selected::after {
+  content: "";
+  bottom: 0;
+  position: absolute;
+  border: none;
+}
+.container > .mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 98;
+}
+.container > .picker {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  background: #FFFFFF;
+}
+.container > .picker > .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3vw 4vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #333333;
+}
+.container > .picker > .title > .cancel {
+  font-size: 3.75vw;
+  color: #666666;
+}
+.container > .picker > .title > .confirm {
+  font-size: 3.75vw;
+  color: #3c9cff;
+}
+.container > .picker .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container input {
+  width: 100%;
+}
+.container > .content {
+  padding: 4vw;
+  background: #FFFFFF;
+  margin-top: 2.67vw;
+}
+.container > .content > .info_item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 5.47vw;
+}
+.container > .content > .info_item > .value {
+  width: 66.67vw;
+  font-size: 3.2vw;
+  color: #333333;
+  padding-bottom: 2.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px #666666;
+}
+.container > .content > .info_item > .value > image {
+  width: 5.33vw;
+  height: 5.33vw;
+}
+.container > .content > .info_item > .value > .getCode {
+  width: 23.2vw;
+  height: 5.33vw;
+  border-radius: 1.33vw;
+  border: 1px solid #F97E39;
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #F97E39;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container > .content > .info_item > .label {
+  font-size: 3.2vw;
+  color: #333333;
+}
+.container > .content > .info_item > .label[data-required]::before {
+  content: "*";
+  font-size: 3.2vw;
+  color: #FF8177;
+  margin-right: 1.6vw;
+}
+.container > .content > .idcard {
+  margin: 4vw 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container > .content > .idcard > .item {
+  width: 40.8vw;
+  height: 22.93vw;
+  border-radius: 1.33vw;
+  border: 1px dotted #999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #999999;
+  position: relative;
+  overflow: hidden;
+}
+.container > .content > .idcard > .item > image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.container > .content > .label {
+  font-weight: bold;
+  font-size: 3.73vw;
+  color: #333333;
+  display: flex;
+  align-items: center;
+}
+.container > .content > .label::before {
+  content: "";
+  width: 1.07vw;
+  height: 5.33vw;
+  background: #F97E39;
+  border-radius: 1.33vw;
+  margin-right: 1.47vw;
+}

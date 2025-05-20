@@ -1,0 +1,213 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.blank {
+  height: 18vw;
+}
+.bottom {
+  width: 100vw;
+  height: 17.07vw;
+  background: #FFFFFF;
+  border-radius: 1.33vw 1.33vw 0 0;
+  border: 0.13vw solid #999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+}
+.bottom > .share {
+  width: 80vw;
+  height: 12vw;
+  line-height: 12vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #fee8ae;
+}
+.cashOutContent {
+  padding: 4vw;
+}
+.cashOutContent > .cash_out {
+  width: 80vw;
+  height: 12vw;
+  line-height: 12vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #fee8ae;
+  margin: 15vw auto 0;
+}
+.cashOutContent > .inputBox {
+  height: 8vw;
+  background: #F5F5F5;
+  border-radius: 1.33vw;
+  padding: 0 2.67vw;
+}
+.cashOutContent > .inputBox > .error {
+  flex: 1;
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #ED1805;
+  text-align: right;
+}
+.cashOutContent > .inputBox > input {
+  flex: 1;
+}
+.cashOutContent > .label {
+  font-weight: 500;
+  font-size: 4vw;
+  color: #000000;
+  margin-bottom: 1.2vw;
+}
+.cashOutContent > .label > .tips {
+  font-weight: bold;
+  font-size: 3.2vw;
+}
+.cashOutContent .title {
+  font-weight: bold;
+  font-size: 4.27vw;
+  color: #000000;
+  margin-bottom: 4vw;
+}
+.container {
+  height: 100%;
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+.container > .share {
+  background: #000000;
+  position: fixed;
+  right: 3vw;
+  top: 3vw;
+  padding: 1vw 3vw;
+  border-radius: 5vw;
+  color: #fee8ae;
+  font-size: 3.25vw;
+}
+.container > .share > .line {
+  width: 1px;
+  height: 3vw;
+  background: #fee8ae;
+  margin: 0 2vw;
+}
+.container > .share > .arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid #000000;
+  position: absolute;
+  top: -10px;
+}
+.container > .item {
+  padding: 2.67vw 4vw;
+  background: #FFFFFF;
+  margin-bottom: 1.33vw;
+}
+.container > .item > .right {
+  width: 20vw;
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #000000;
+}
+.container > .item > .right > .bottom {
+  margin-top: .8vw;
+}
+.container > .item > .right > .bottom > text {
+  font-weight: bold;
+  color: #ED1805;
+}
+.container > .item > .left > .info {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #000000;
+  margin-left: 2.67vw;
+}
+.container > .item > .left > .info .showDetail {
+  padding: 1vw;
+  background-color: #000000;
+  border-radius: 5px;
+  font-size: 2vw;
+  margin-left: 2vw;
+  color: #fee8ae;
+}
+.container > .item > .left > .info > text {
+  font-weight: bold;
+  font-size: 3.2vw;
+}
+.container > .item > .left > image {
+  width: 8vw;
+  height: 8vw;
+  border-radius: 50%;
+}
+.container > .label {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+  padding: 4vw 4vw 1.33vw;
+}
+.container > .label > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #ED1805;
+}
+.container > .head {
+  padding: 0 4vw;
+  height: 10.93vw;
+  background: #FFFFFF;
+}
+.container > .head > .right {
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.container > .head > .right > .cash_out {
+  width: 13.33vw;
+  height: 5.33vw;
+  line-height: 5.33vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  margin-left: 4vw;
+  font-weight: bold;
+  font-size: 3.2vw;
+  color: #fee8ae;
+}
+.container > .head > .left {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #000000;
+}
+.container > .head > .left > text {
+  color: #ED1805;
+  margin-left: 3.47vw;
+}
+

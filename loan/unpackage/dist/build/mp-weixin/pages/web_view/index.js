@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/vendor.js"),r=e.defineComponent({__name:"index",props:{url:{type:String}},setup(r){const n=r;return n.url||e.index.showToast({title:"链接无效",icon:"error",duration:2e3}),(e,r)=>({a:n.url})}});wx.createPage(r);

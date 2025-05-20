@@ -1,0 +1,347 @@
+{
+	"pages": [{
+			"path": "pages/user_home/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+		}, 
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/work/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "工作台",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/rich_text/index",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/web_view/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	],
+	"subPackages": [{
+			"root": "home_packages",
+			"pages": [{
+					"path": "signing/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "自助签约",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "contract/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "合同确认",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "autograph/index",
+					"style": {
+						"mp-weixin": {
+							"pageOrientation": "landscape"
+						},
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "签名板",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "service/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "数据服务",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "service_form/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "数据服务授权",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "service_sign/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "数据服务授权",
+						"enablePullDownRefresh": false
+					}
+				}, {
+					"path": "assistant/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "云助手",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "record/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "数据通",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "details/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "产品详情",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "data_entry/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "数据录入",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "select_bank_card/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "选择银行卡",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "add_bank_card/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增银行卡",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "add_personal/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增个人共借、融担",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "add_enterprise/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增企业共借、融担",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "add_house/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增、编辑房产",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "ownership/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增产权人",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "weituo_person/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "新增受托人",
+						"enablePullDownRefresh": false
+					}
+				}
+			]
+		},
+		{
+			"root": "work_packages",
+			"pages": [{
+					"path": "submitted/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "待提交",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "grab/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "可抢件",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "backlog/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "待办件",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "detail/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "待办件详情",
+						"enablePullDownRefresh": false
+					}
+				}
+			]
+		},
+		{
+			"root": "mine_packages",
+			"pages": [{
+					"path": "signing/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "签约宝",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "order_detail/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "订单详情",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "schedule/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "进度查询",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "progress_list/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "进度列表",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "message/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "我的消息",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "authentication/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "认证管理",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "phone_auth/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "手机认证",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "realname_auth/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "实名认证",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "wechat_auth/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "微信绑定",
+						"enablePullDownRefresh": false
+					}
+				}
+			]
+		}
+	],
+	"easycom": {
+		"autoscan": true,
+		// 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+		"custom": {
+			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^l-(.*)": "@/uni_modules/l-calender/components/u-$1/u-$1.vue"
+		}
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#F97E39",
+		"list": [{
+			"text": "首页",
+			"iconPath": "static/home.png",
+			"selectedIconPath": "static/home_active.png",
+			"pagePath": "pages/user_home/index"
+		}, {
+			"text": "首页",
+			"iconPath": "static/home.png",
+			"selectedIconPath": "static/home_active.png",
+			"pagePath": "pages/home/index"
+		}, {
+			"text": "工作台",
+			"iconPath": "static/work.png",
+			"selectedIconPath": "static/work_active.png",
+			"pagePath": "pages/work/index"
+		}, {
+			"text": "我的",
+			"iconPath": "static/mine.png",
+			"selectedIconPath": "static/mine_active.png",
+			"pagePath": "pages/mine/index"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

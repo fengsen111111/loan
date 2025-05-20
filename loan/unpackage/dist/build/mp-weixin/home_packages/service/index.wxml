@@ -1,0 +1,1 @@
+<view class="container"><navbar wx:if="{{a}}" u-i="383f72ab-0" bind:__l="__l" u-p="{{a}}"></navbar><u-parse wx:if="{{b}}" class="parse_content" u-i="383f72ab-1" bind:__l="__l" u-p="{{b}}"></u-parse><view style="height:20vw"></view><option-bt wx:if="{{d}}" bindconfirm="{{c}}" u-i="383f72ab-2" bind:__l="__l" u-p="{{d}}"></option-bt></view>

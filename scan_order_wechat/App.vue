@@ -1,0 +1,40 @@
+<script>
+	export default {
+		onLaunch: function() {
+			console.log('App Launch')
+		},
+		onShow: function() {
+			console.log('App Show')
+		},
+		onHide: function() {
+			console.log('App Hide')
+		}
+	}
+</script>
+
+<style>
+	/*每个页面公共css */
+	button {
+		all: unset
+	}
+
+	.btn {
+		width: 80vw;
+		height: 12vw;
+		line-height: 12vw;
+		text-align: center;
+		background: #EFA246;
+		border-radius: 6vw;
+		font-weight: bold;
+		font-size: 4vw;
+		color: #FFFFFF;
+		margin: 0 auto
+	}
+
+	.image {
+		width: 84vw;
+		height: 126.67vw;
+		border-radius: 2.67vw;
+		margin-bottom: 4.27vw
+	}
+</style>

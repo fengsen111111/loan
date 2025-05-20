@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "数据服务",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-parse": "../../node-modules/uview-plus/components/u-parse/u-parse",
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

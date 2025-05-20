@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-parse": "../../node-modules/uview-plus/components/u-parse/u-parse"
+  }
+}

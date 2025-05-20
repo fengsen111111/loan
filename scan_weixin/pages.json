@@ -1,0 +1,173 @@
+{
+	"subPackages": [{
+			"root": "home_packages",
+			"pages": [{
+					"path": "search/index",
+					"style": {
+						"navigationBarTitleText": "搜索"
+					}
+				},
+				{
+					"path": "shop_detail/index",
+					"style": {
+						"navigationBarTitleText": "门店详情"
+					}
+				},
+				{
+					"path": "place_order/index",
+					"style": {
+						"navigationBarTitleText": "下单"
+					}
+				},
+				{
+					"path": "album/index",
+					"style": {
+						"navigationBarTitleText": "相册"
+					}
+				}
+			]
+		}, {
+			"root": "order_packages",
+			"pages": [{
+				"path": "detail/index",
+				"style": {
+					"navigationBarTitleText": "订单详情"
+				}
+			}]
+		},
+		{
+			"root": "mine_packages",
+			"pages": [{
+					"path": "wallet/index",
+					"style": {
+						"navigationBarTitleText": "钱包"
+					}
+				},
+				{
+					"path": "charge/index",
+					"style": {
+						"navigationBarTitleText": "充值活动"
+					}
+				},
+				{
+					"path": "discount/index",
+					"style": {
+						"navigationBarTitleText": "优惠卷"
+					}
+				},
+				{
+					"path": "collect/index",
+					"style": {
+						"navigationBarTitleText": "收藏"
+					}
+				},
+				{
+					"path": "distributive/index",
+					"style": {
+						"navigationBarTitleText": "我的分销"
+					}
+				},
+				{
+					"path": "record/index",
+					"style": {
+						"navigationBarTitleText": "收益记录"
+					}
+				},
+				{
+					"path": "manage/index",
+					"style": {
+						"navigationBarTitleText": "门店管理"
+					}
+				},
+				{
+					"path": "restaurant/index",
+					"style": {
+						"navigationBarTitleText": "餐位详情"
+					}
+				},
+				{
+					"path": "points/index",
+					"style": {
+						"navigationBarTitleText": "积分商城"
+					}
+				},
+				{
+					"path": "point_detail/index",
+					"style": {
+						"navigationBarTitleText": "积分记录"
+					}
+				},
+				{
+					"path": "distribute/index",
+					"style": {
+						"navigationBarTitleText": "二级分销"
+					}
+				}
+			]
+		}
+	],
+	"tabBar": {
+		"color": "#707070",
+		"selectedColor": "#FA4741",
+		"list": [{
+			"text": "首页",
+			"iconPath": "static/home.png",
+			"selectedIconPath": "static/home_active.png",
+			"pagePath": "pages/Home/index"
+		}, {
+			"text": "订单",
+			"iconPath": "static/order.png",
+			"selectedIconPath": "static/order_active.png",
+			"pagePath": "pages/Order/index"
+		}, {
+			"text": "我的",
+			"iconPath": "static/mine.png",
+			"selectedIconPath": "static/mine_active.png",
+			"pagePath": "pages/Mine/index"
+		}]
+	},
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/Home/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/Order/index",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/Mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/RichText/index",
+			"style": {
+				"navigationBarTitleText": "活动内容"
+			}
+		},
+		{
+			"path": "pages/WebPage/index",
+			"style": {
+				"navigationBarTitleText": "webView"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"uniIdRouter": {}
+}

@@ -1,0 +1,81 @@
+{
+  "pages": [
+    "pages/Home/index",
+    "pages/Order/index",
+    "pages/Mine/index",
+    "pages/RichText/index",
+    "pages/WebPage/index"
+  ],
+  "subPackages": [
+    {
+      "root": "home_packages",
+      "pages": [
+        "search/index",
+        "shop_detail/index",
+        "place_order/index",
+        "album/index"
+      ]
+    },
+    {
+      "root": "order_packages",
+      "pages": [
+        "detail/index"
+      ]
+    },
+    {
+      "root": "mine_packages",
+      "pages": [
+        "wallet/index",
+        "charge/index",
+        "discount/index",
+        "collect/index",
+        "distributive/index",
+        "record/index",
+        "manage/index",
+        "restaurant/index",
+        "points/index",
+        "point_detail/index",
+        "distribute/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#FA4741",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home_active.png",
+        "pagePath": "pages/Home/index"
+      },
+      {
+        "text": "订单",
+        "iconPath": "static/order.png",
+        "selectedIconPath": "static/order_active.png",
+        "pagePath": "pages/Order/index"
+      },
+      {
+        "text": "我的",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_active.png",
+        "pagePath": "pages/Mine/index"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "根据用户当前位置，推荐附近商户已提供更好的服务"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "usingComponents": {}
+}

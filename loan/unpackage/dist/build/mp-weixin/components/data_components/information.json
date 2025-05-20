@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "u-radio": "../../node-modules/uview-plus/components/u-radio/u-radio",
+    "u-radio-group": "../../node-modules/uview-plus/components/u-radio-group/u-radio-group",
+    "u-checkbox": "../../node-modules/uview-plus/components/u-checkbox/u-checkbox",
+    "u-checkbox-group": "../../node-modules/uview-plus/components/u-checkbox-group/u-checkbox-group",
+    "l-calendar": "../../uni_modules/l-calendar/components/l-calendar/l-calendar",
+    "option-bt": "../option-bt"
+  }
+}

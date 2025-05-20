@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "新增企业共借、融担",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "u-picker": "../../node-modules/uview-plus/components/u-picker/u-picker",
+    "l-calendar": "../../uni_modules/l-calendar/components/l-calendar/l-calendar",
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

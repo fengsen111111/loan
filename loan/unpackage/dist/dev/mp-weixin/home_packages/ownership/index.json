@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "新增产权人",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-picker": "../../node-modules/uview-plus/components/u-picker/u-picker",
+    "l-calendar": "../../uni_modules/l-calendar/components/l-calendar/l-calendar",
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

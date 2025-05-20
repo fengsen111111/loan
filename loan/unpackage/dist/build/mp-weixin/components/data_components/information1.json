@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "u-radio": "../../node-modules/uview-plus/components/u-radio/u-radio",
+    "u-radio-group": "../../node-modules/uview-plus/components/u-radio-group/u-radio-group",
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "option-bt": "../option-bt"
+  }
+}

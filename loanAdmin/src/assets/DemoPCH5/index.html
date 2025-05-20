@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PC H5密码键盘demo</title>
+		<meta charset="utf-8" />
+		<meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">    
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<link rel="stylesheet" href="css/microdone.css" />
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/microdone.js" ></script>
+		<script>
+			//点击'软键盘'按钮时，如果密码输入框的值为空，则显示对应的模拟placeholder的span标签，相反则隐藏
+			function showSpan(spanId, inputId){		
+				if($("#" + inputId).val() == ""){
+					document.getElementById(spanId).style.display = 'block';
+				}else{
+					document.getElementById(spanId).style.display = 'none';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<span class="hidden"></span>
+		<div class="Box">
+			<div class="ipt_pwd" id="ipt_pwd">
+				<!-- 如果要同时集成插件非插件密码控件和H5软件盘，则使用该div，
+				该div内部用于绘制插件非插件密码控件标签，否则不用写该div-->
+				<div class="pwd-kongjian">
+					<a href="#" class="down-KJ">下载控件 或点击→</a>
+				</div>
+				<!-- 该span标签模拟密码输入框的placeholder，用于解决低版本IE浏览器(IE8及以下)不支持placeholder的问题 -->
+                <span id= "LOGPASS_SHOW" class="holderClass" >登录密码</span>
+                <input class="default input_search" id="LOGPASS" type="password"
+                 style='color:#333;' disabled="disabled" />
+				<div class="ipt_pwd_rjp default" id="keyboardBtn" style="cursor:pointer;" onclick="showSpan('LOGPASS_SHOW','LOGPASS');">软键盘</div>
+			</div>
+			<div class="ipt_pwd" id="ipt_pwd2">
+				<!-- 该span标签模拟密码输入框的placeholder，用于解决低版本IE浏览器(IE8及以下)不支持placeholder的问题 -->
+                <span id= "LOGPASS2_SHOW" class="holderClass" style="display:block;">登录密码2</span>
+                <input class="default input_search" id="LOGPASS2" type="password"
+                 style='color:#333;' disabled="disabled"/>
+				<div class="ipt_pwd_rjp default" id="keyboardBtn2" style="cursor:pointer;" onclick="showSpan('LOGPASS2_SHOW','LOGPASS2');">软键盘</div>
+			</div>
+		</div>
+		<input type="text" name="" id="test">
+		<ul class="items">
+			<li>点击获取另一个软键盘信息：<span>第一个</span></li>
+			<li>长度</li>
+			<li>是否是简单密码</li>
+			<li>组合类型</li>
+			<li>字符类型个数</li>
+			<li>清空密码</li>
+			<li>是否匹配正则表达式二</li>
+			<li>密码密文(AES+RSA)</li>
+			<li>密码密文(SM4+SM2)</li>
+			<li>密码hash</li>
+		</ul>
+	</body>
+	<script>
+		/**
+		 * PC H5密码键盘方法参数说明：
+		 * 1.KJswitch: 是否使用插件非插件密码控件(需要单独采购)的开关，
+		 * 用的话直接传绘制插件非插件密码控件的父标签的class名，如果没有可以设置成空字符串或不设置该属性
+		 * 2.click_objId：触发显示键盘的Dom节点Id
+		 * 3.regExp1：输入过程限制的正则，不匹配正则的字符不让输入
+		 * 4.regExp2：输入完成后的正则，与getValid()对应，判断输入值是否匹配该正则
+		 * 5.Input_texId：接收内容的Dom节点Id
+		 * 6.parent_objId:将键盘插入到何处的Dom节点Id
+		 * 7.placeholderId：span标签的id，该span用于模拟Input_texId的placeholder
+		 * 8.len:表示最大允许输入多少个字符[可以不传递]
+		 * 9.keyBordLeft:键盘距离左边定位位置[默认为0],可以不传递,设置时需要加单位px
+		 * 10.keyBordTop：键盘距离顶部定位位置[默认为parent_objId的高度],可以不传递,设置时需要加单位px
+		 * 11.chaosMode:混乱模式,0:无混乱;1:打开时乱一次;2:每输入一个字符乱一次,默认值0
+		 * 12.clickStatus: 按键状态,0:鼠标划过、悬浮时按键无变化;1:鼠标划过、悬浮时按键的颜色变化,默认值0
+		 * 13.callBack:输入完毕后点击确定键或空白处关闭键盘时，如果已输入的内容跟regExp2匹配则回调此方法
+		 * 14.errorCallBack:输入完毕后点击确定键或空白处关闭键盘时，如果已输入的内容跟regExp2不匹配则回调此方法
+		 * 15.png:图片的路径地址
+		 * titlefont    logo旁边的文字
+			backfont   退格键文字
+			capsfont   切换大小写文字
+			surefont    确定键文字
+			isen       是否是英文，如果是，此处应该设置成true
+		 * */
+		var showKeyBord1 = new showKeyBord({
+			"KJswitch":".pwd-kongjian",
+			"click_objId":"#keyboardBtn",
+			"regExp1" : "[\\S\\s]",
+			"regExp2": "^[\\S\\s]{6,12}$",
+			"Input_texId":"#LOGPASS",
+			"parent_objId":"#ipt_pwd",
+			"placeholderId":"#LOGPASS_SHOW",
+			"len":"13",
+		    "keyBordLeft":"",
+			"keyBordTop":"",
+			"chaosMode" : 0,
+			"clickStatus":1,
+			"callBack":cb1,
+	    	"errorCallBack":cb2,
+	    	"png":"img",
+			"titlefont":"安全支付输入",
+			"backfont":"退 格",
+			"capsfont":"切换大/小写",
+			"surefont":"确定",
+	    	"rsaPublicKey":"3081890281810092d9d8d04fb5f8ef9b8374f21690fd46fdbf49b40eeccdf416b4e2ac2044b0cfe3bd67eb4416b26fd18c9d3833770a526fd1ab66a83ed969af74238d6c900403fc498154ec74eaf420e7338675cad7f19332b4a56be4ff946b662a3c2d217efbe4dc646fb742b8c62bfe8e25fd5dc59e7540695fa8b9cd5bfd9f92dfad009d230203010001", // rsa公钥
+			"sm2KeyHex":"1093A047C5CBF48283EC7A210703F3FF9EA4448DC15D56B4CD82FCB27DAD2D45F2BB0BF953BCEBB635D9D34E473ECEFC9F25880EB1669F94DE050A29AC86F308",
+			"license":"cWpJN3FLclcxL0xBRFNhYTdtK3NySDZDZUdFT2hBclBmMGtnMWFvbm1NTEVyT3NBSXQ5c3VSVTgreE9pOUljSDNHZVA5bmxyZTEwcVR4SGh5djltYnQ2aDhDOUhzeHFsTzNWUkVqSVhqZm1YVFk2TmMxN3Jrc0NBSjJ6K3k4MExpMEJnRTcvam9MMUw2NFF5d2VUMm4xeHlRUmZ0K2ZoNC9MWlZVNCtHSGhVPXsiaWQiOjAsInR5cGUiOiJ0ZXN0IiwicGxhdGZvcm0iOjEwLCJub3RiZWZvcmUiOiIyMDIxMTIxMyIsIm5vdGFmdGVyIjoiMjAyMjAzMTMifQ=="
+		});
+		var showKeyBord2 = new showKeyBord({
+			"click_objId":"#keyboardBtn2",
+			"regExp1" : "[a-z]",
+			"regExp2": "^[a-z]{6,12}$",
+			"Input_texId":"#LOGPASS2",
+			"parent_objId":"#ipt_pwd2",
+			"placeholderId":"#LOGPASS2_SHOW",
+			"len":"12",
+		    "keyBordLeft":"",
+			"keyBordTop":"",
+			"chaosMode" : 2,
+			"clickStatus":0,
+			"callBack":cb3,
+	    	"errorCallBack":cb4,
+	    	"png":"img",
+			"titlefont":"security input",
+			"backfont":"del",
+			"capsfont":"CapsLock",
+			"surefont":"done",
+			"isen":true,
+	    	"rsaPublicKey":"3081890281810092d9d8d04fb5f8ef9b8374f21690fd46fdbf49b40eeccdf416b4e2ac2044b0cfe3bd67eb4416b26fd18c9d3833770a526fd1ab66a83ed969af74238d6c900403fc498154ec74eaf420e7338675cad7f19332b4a56be4ff946b662a3c2d217efbe4dc646fb742b8c62bfe8e25fd5dc59e7540695fa8b9cd5bfd9f92dfad009d230203010001", // rsa公钥
+			"sm2KeyHex":"1093A047C5CBF48283EC7A210703F3FF9EA4448DC15D56B4CD82FCB27DAD2D45F2BB0BF953BCEBB635D9D34E473ECEFC9F25880EB1669F94DE050A29AC86F308",
+			"license":"cWpJN3FLclcxL0xBRFNhYTdtK3NySDZDZUdFT2hBclBmMGtnMWFvbm1NTEVyT3NBSXQ5c3VSVTgreE9pOUljSDNHZVA5bmxyZTEwcVR4SGh5djltYnQ2aDhDOUhzeHFsTzNWUkVqSVhqZm1YVFk2TmMxN3Jrc0NBSjJ6K3k4MExpMEJnRTcvam9MMUw2NFF5d2VUMm4xeHlRUmZ0K2ZoNC9MWlZVNCtHSGhVPXsiaWQiOjAsInR5cGUiOiJ0ZXN0IiwicGxhdGZvcm0iOjEwLCJub3RiZWZvcmUiOiIyMDIxMTIxMyIsIm5vdGFmdGVyIjoiMjAyMjAzMTMifQ=="
+		});
+		function cb1(){
+			console.log("关闭键盘后如果第一个密码键盘输入的内容匹配regExp2则回调此函数");
+		}
+		function cb2(){
+			console.log("关闭键盘后如果第一个密码键盘输入的内容不匹配regExp2则回调此函数");
+		}
+		function cb3(){
+			console.log("关闭键盘后如果第二个密码键盘输入的内容匹配regExp2则回调此函数");
+		}
+		function cb4(){
+			console.log("关闭键盘后如果第二个密码键盘输入的内容不匹配regExp2则回调此函数");
+		}
+		$(function(){
+			//初始化键盘对象showKeyBord1、showKeyBord2
+			showKeyBord1.initOptions();
+			showKeyBord2.initOptions();
+			/*
+			* 给页面按钮绑定软键盘功能测试事件 
+			*/
+			var softID = showKeyBord1;
+			$(".items>li").eq(0).click(function(){
+				if($(this).find("span").text()=="第一个"){
+					$(this).find("span").text("第二个");
+					softID = showKeyBord2;
+				}else{
+					$(this).find("span").text("第一个");
+					softID = showKeyBord1;
+				};
+			});
+			$(".items>li").eq(1).click(function(){
+				var val = softID.getLength();
+				$("#test").val(val);
+			});
+			$(".items>li").eq(2).click(function(){
+				var val = softID.pwdSimple();
+				$("#test").val(val == "0" ? "不是" : "是");
+			})
+			$(".items>li").eq(3).click(function(){
+				var val = softID.pwdCommon();
+				$("#test").val(val);
+			})
+			$(".items>li").eq(4).click(function(){
+				var val = softID.pwdNum();
+				$("#test").val(val);
+			})
+			$(".items>li").eq(5).click(function(){
+				var val = softID.clearPWD();
+				$("#test").val(val);
+			})
+			$(".items>li").eq(6).click(function(){
+				var val = softID.getValid();
+				$("#test").val(val == "1" ? "不匹配" : "匹配");
+			})
+			$(".items>li").eq(7).click(function(){
+				softID.setRandKey("12345678901234567890123456789012");
+				var val = softID.getOutput();
+				$("#test").val(val);
+			})
+			$(".items>li").eq(8).click(function(){
+				softID.setRandKey("12345678901234567890123456789012");
+				var val = softID.getOutputSM();
+				$("#test").val(val);
+			})
+			$(".items>li").eq(9).click(function(){
+				var val = softID.getHash();
+				$("#test").val(val);
+			})
+		})
+	</script>
+	<style>
+		#test {
+			margin: 30px auto 0;
+			width: 300px;
+			height: 38px;
+			border-radius: 3px;
+			border: 1px solid #999;
+			display: block;
+		}
+		.items{
+			margin: 20px auto;
+			overflow:hidden;
+			clear: both;
+		}
+		.items li{
+			width:auto;
+			height: 36px;
+			line-height: 36px;
+			background: #666;
+			border-radius: 3px;
+			padding: 0 10px;
+			float: left;
+			margin:10px;
+			color: #fff;
+			cursor:pointer;
+		}
+	</style>
+</html>

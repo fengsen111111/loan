@@ -1,0 +1,258 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.u-radio {
+  margin-right: 16px;
+}
+.seatContent {
+  width: 80vw;
+  max-height: 50vh;
+  padding: 5.33vw 4vw 0;
+  overflow: hidden;
+}
+.seatContent .order_list > .item {
+  border: solid 1px #000000;
+  padding: 2px 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3vw;
+  color: #000000;
+  font-weight: bold;
+  font-size: 4vw;
+  margin-top: 5vw;
+}
+.seatContent .order_list > .active {
+  background-color: #000000;
+  color: #f5e8ae;
+}
+.seatContent > .confirm {
+  width: 80vw;
+  height: 12vw;
+  line-height: 12vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  margin: 10vw auto 0;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #f5e8ae;
+}
+.seatContent > .title {
+  font-weight: bold;
+  font-size: 4.27vw;
+  color: #000000;
+  margin-bottom: 5.33vw;
+}
+.seatContent .list {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+.seatContent .list > .item {
+  border: solid 1px #000000;
+  padding: 2px 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3vw;
+  color: #000000;
+  font-weight: bold;
+  font-size: 4vw;
+}
+.seatContent .list > .active {
+  background-color: #000000;
+  color: #f5e8ae;
+}
+.container {
+  height: 100%;
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+.container > .orderBox {
+  width: 15vw;
+  height: 15vw;
+  position: fixed;
+  right: 5vw;
+  bottom: 20vw;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  color: #f5e8ae;
+  font-size: 4vw;
+  font-weight: bold;
+}
+.container > .list {
+  margin-top: 2.67vw;
+  background: #FFFFFF;
+}
+.container > .list > .busy {
+  padding: 2.67vw 4vw 4vw;
+}
+.container > .list > .busy > .option > .right > .end {
+  width: 21.33vw;
+  height: 8vw;
+  line-height: 8vw;
+  text-align: center;
+  background: #000000;
+  border-radius: 6vw;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #f5e8ae;
+  margin-left: 2.93vw;
+}
+.container > .list > .busy > .option > .right > .patchwork {
+  width: 21.33vw;
+  height: 8vw;
+  line-height: 8vw;
+  text-align: center;
+  border-radius: 6vw;
+  border: 0.27vw solid #000000;
+  font-weight: bold;
+  font-size: 4vw;
+  color: #000000;
+}
+.container > .list > .busy > .option > .left {
+  font-weight: 400;
+  font-size: 4vw;
+  color: #000000;
+}
+.container > .list > .busy > .option > .left > text {
+  font-weight: bold;
+  color: #ED1805;
+  margin-left: 2.67vw;
+}
+.container > .list > .busy > .info {
+  font-weight: 500;
+  font-size: 3.2vw;
+  color: #000000;
+  margin-bottom: 5.33vw;
+}
+.container > .list > .busy > .title {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #000000;
+  padding-bottom: 1.33vw;
+  border-bottom: solid 1px #999999;
+  margin-bottom: 2.67vw;
+}
+.container > .list > .busy > .title > .right {
+  font-size: 3.2vw;
+}
+.container > .list > .busy > .title > .right > text {
+  font-weight: 500;
+  font-size: 2.67vw;
+  color: #EFA246;
+  margin-left: 3.07vw;
+}
+.container > .list > .item {
+  font-weight: bold;
+  font-size: 4vw;
+  color: #000000;
+  height: 10.93vw;
+  padding: 0 4vw;
+}
+.container > .list > .item > text {
+  font-size: 3.2vw;
+  color: #80CF40;
+}
+.container > .head {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.container > .head > .screen {
+  background: #FFFFFF;
+  padding: 1.67vw 4vw;
+  border-bottom: solid 1.33vw #F5F5F5;
+}
+.container > .head > .screen > .item {
+  width: 40vw;
+  height: 10vw;
+  text-align: center;
+  line-height: 10vw;
+  border-radius: 5vw;
+}
+.container > .head > .screen > .active {
+  background: black;
+  color: #f5e8ae;
+}
+.container > .head > .title {
+  background: #FFFFFF;
+  padding: 1.67vw 4vw;
+  position: relative;
+}
+.container > .head > .title > .popup {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #F5F5F5;
+  z-index: 2;
+  padding-bottom: 2.67vw;
+}
+.container > .head > .title > .popup > .active {
+  font-weight: bold !important;
+  color: #FA4741 !important;
+}
+.container > .head > .title > .popup > .item {
+  padding: 0 8vw;
+  margin-top: 4vw;
+  font-weight: 400;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.container > .head > .title > .mask {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+}
+.container > .head > .title > .screen {
+  font-weight: 500;
+  font-size: 3.2vw;
+  color: #000000;
+}
+.container > .head > .title > .screen > text {
+  margin-right: 2.67vw;
+}
+.container > .head > .title > .inputBox {
+  width: 70.66vw;
+  height: 8vw;
+  background: #F5F5F5;
+  border-radius: 4.67vw;
+  padding: 0 2.67vw;
+}
+.container > .head > .title > .inputBox > input {
+  flex: auto;
+}
+

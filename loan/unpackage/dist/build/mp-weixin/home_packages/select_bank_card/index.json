@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "选择银行卡",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

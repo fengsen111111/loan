@@ -1,0 +1,13 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "新增银行卡",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-radio": "../../node-modules/uview-plus/components/u-radio/u-radio",
+    "u-radio-group": "../../node-modules/uview-plus/components/u-radio-group/u-radio-group",
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "u-picker": "../../node-modules/uview-plus/components/u-picker/u-picker",
+    "navbar": "../../components/navbar",
+    "option-bt": "../../components/option-bt"
+  }
+}

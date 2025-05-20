@@ -1,0 +1,1 @@
+<view class="container"><view style="height:1.33vw;"></view><block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index"><food-item vue-id="{{'45d74766-1-'+index}}" item="{{item}}" index="{{index}}" collect="{{true}}" bind:__l="__l"></food-item></block></view>

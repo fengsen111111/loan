@@ -1,0 +1,214 @@
+<template>
+  <div class="gi_page">
+    <a-card class="general-card">
+      <a-steps label-placement="vertical" :current="current" style="width: 40%; margin: 0 auto">
+        <a-step>选择待开票数据</a-step>
+        <a-step>确认发票信息和地址</a-step>
+      </a-steps>
+      <div v-if="current == 1">
+        <GiTable row-key="id" :data="dataList" :columns="columns" :loading="loading"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
+          :disabledTools="['fullscreen', 'refresh', 'size', 'setting']" @refresh="search">
+          <template #custom-left>
+            <div style="display: flex; width: 500px">
+              <div class="name" style="width: 200px; margin-left: -20px">帐期</div>
+              <DateRangePicker v-model="loginTime" @change="search" />
+            </div>
+          </template>
+        </GiTable>
+      </div>
+      <div v-if="current == 2">
+        <a-collapse :default-active-key="['1']" :accordion="true">
+          <a-collapse-item header="开票数据信息" key="1">
+            <div style="width: 100%">
+              <GiTable row-key="id" :data="dataList" :columns="columns1" :loading="loading"
+                :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
+                :disabledTools="['fullscreen', 'refresh', 'size', 'setting']" @refresh="search"></GiTable>
+            </div>
+          </a-collapse-item></a-collapse>
+        <a-collapse :default-active-key="['1']" :accordion="true">
+          <a-collapse-item header="发票信息" key="1">
+            <div style="width: 100%">
+              <a-row class="grid-demo">
+                <a-col :span="12">
+                  <div><span>开票主体 </span> {{ detailCon?.contract_num }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>发票抬头 成都荣杰资产管理有限公司</span> {{ detailCon?.id }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>发票类型 增值税普通发票</span> {{ detailCon?.order_material?.apply_money }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>账号</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>注册固定电话</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>开票内容</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>统一社会信用代码</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>开户银行名称</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+
+                <a-col :span="12">
+                  <div><span>注册场所地址</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+                <a-col :span="12">
+                  <div><span>发票方式</span> {{ detailCon?.order_material?.goods_name }}</div>
+                </a-col>
+              </a-row>
+            </div>
+          </a-collapse-item></a-collapse>
+      </div>
+      <div class="btn">
+        <a-button type="primary" v-if="current == 2" @click="btn('1')">上一步</a-button>
+        <a-button type="primary" v-if="current == 1" @click="btn('2')">下一步</a-button>
+        <a-button type="primary" v-if="current == 2" @click="btn('1')">确认开票</a-button>
+      </div>
+    </a-card>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { getInvoiceList, getStoreCapitalList } from '@/apis'
+import { Message } from '@arco-design/web-vue'
+import type { TableInstanceColumns } from '@/components/GiTable/type'
+import DateRangePicker from '@/components/DateRangePicker/index.vue'
+import { useUserStore } from '@/stores'
+import { useTable } from '@/hooks'
+import { isMobile } from '@/utils'
+import has from '@/utils/has'
+import { number } from 'echarts'
+const open = ref<boolean>(false)
+const current = ref(1)
+const userStore = useUserStore()
+const capitalList = ref([])
+const fieldNames = { value: 'name', label: 'name' }
+const currentToken = userStore.token
+const loginTime = ref([])
+const columns: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '合同编号', dataIndex: 'contract_num', width: 180, ellipsis: true, tooltip: true },
+  { title: '转债确认单编号  ', dataIndex: 'move_num', width: 180, ellipsis: true, tooltip: true },
+  { title: '客户姓名  ', dataIndex: 'name', width: 180, ellipsis: true, tooltip: true },
+  { title: '证件号码  ', dataIndex: 'card_number', width: 180, ellipsis: true, tooltip: true },
+  { title: '证件类型', dataIndex: 'card_type', width: 180, ellipsis: true, tooltip: true },
+  { title: '申请金额 ', dataIndex: 'apply_money', width: 180 },
+  { title: '助贷方名称 ', dataIndex: 'capital_name', width: 180 },
+  { title: '确认时间 ', dataIndex: 'sure_time', width: 180 },
+  { title: '确认人  ', dataIndex: 'worker_name', width: 180 },
+  {
+    title: '操作',
+    width: 180,
+
+    slotName: 'action',
+    align: 'center',
+    fixed: 'right',
+    show: true
+  }
+]
+const columns1: TableInstanceColumns[] = [
+  {
+    title: '序号',
+    width: 66,
+    align: 'center',
+    render: ({ rowIndex }) => h('span', {}, rowIndex + 1 + (pagination.current - 1) * pagination.pageSize)
+  },
+  { title: '账单月份', dataIndex: 'contract_num', width: 180, ellipsis: true, tooltip: true },
+  { title: '月总消费金额(元)', dataIndex: 'move_num', width: 180, ellipsis: true, tooltip: true },
+  { title: '已开票金额(元) ', dataIndex: 'name', width: 180, ellipsis: true, tooltip: true },
+  { title: '可开票金额(元) ', dataIndex: 'card_number', width: 180, ellipsis: true, tooltip: true },
+
+  {
+    title: '操作',
+    width: 180,
+
+    slotName: 'action',
+    align: 'center',
+    fixed: 'right',
+    show: true
+  }
+]
+
+const queryForm = reactive({
+  start_time: loginTime.value.length > 0 ? loginTime.value[0] : '',
+  end_time: loginTime.value.length > 0 ? loginTime.value[1] : ''
+})
+
+const {
+  tableData: dataList,
+  loading,
+  pagination,
+  search
+} = useTable(
+  (p) =>
+    getInvoiceList({
+      post_params: { ...queryForm, currentPage: p.page, perPage: p.size }
+    }),
+  { immediate: true }
+)
+
+//下一页
+const btn = (val) => {
+  current.value = Number(val)
+  console.log(current.value)
+}
+// 重置
+const reset = () => {
+  loginTime.value = []
+
+  queryForm.move_status = 'c'
+  queryForm.capital_id = ''
+  queryForm.name = ''
+  queryForm.contract_num = ''
+  queryForm.start_time = ''
+  queryForm.end_time = ''
+
+  search()
+}
+
+//关闭
+const handleOk = () => {
+  open.value = false
+}
+// 详情
+const showModel = (item) => {
+  open.value = true
+}
+</script>
+
+<style lang="scss" scoped>
+.name {
+  width: 130px;
+  text-align: right;
+  font-weight: 800;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.btn {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+
+  button {
+    margin-right: 20px;
+  }
+}
+
+.grid-demo {
+  div {
+    margin: 5px 0;
+  }
+}
+</style>

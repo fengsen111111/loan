@@ -1,0 +1,15 @@
+{
+  "component": true,
+  "usingComponents": {
+    "information": "./information",
+    "information1": "./information1",
+    "detailed": "./detailed",
+    "detailed1": "./detailed1",
+    "borrowing": "./borrowing",
+    "borrower": "./borrower",
+    "rongdan": "./rongdan",
+    "houseproperty": "./houseproperty",
+    "otherinfo": "./otherinfo",
+    "option-bt": "../option-bt"
+  }
+}

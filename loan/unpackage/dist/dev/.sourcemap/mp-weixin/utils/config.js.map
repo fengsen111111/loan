@@ -1,0 +1,1 @@
+{"version":3,"file":"config.js","sources":["utils/config.js"],"sourcesContent":["// export const baseUrl = \"https://flower.api.sczhiyun.net\"\n// export const baseUrl = \"https://api.51vanjia.vip\"\nexport const baseUrl = \"https://test.51vanjia.vip\""],"names":[],"mappings":";AAEY,MAAC,UAAU;;"}

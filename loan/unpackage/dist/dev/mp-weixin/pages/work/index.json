@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "工作台",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "u-parse": "../../node-modules/uview-plus/components/u-parse/u-parse",
+    "tabbar": "../../components/tabbar"
+  }
+}

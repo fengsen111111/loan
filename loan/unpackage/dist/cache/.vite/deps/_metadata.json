@@ -1,0 +1,31 @@
+{
+  "hash": "c3f51779",
+  "configHash": "68dff25b",
+  "lockfileHash": "a0428c48",
+  "browserHash": "3073a14a",
+  "optimized": {
+    "crypto-js": {
+      "src": "../../../../../node_modules/crypto-js/index.js",
+      "file": "crypto-js.js",
+      "fileHash": "8c492fdf",
+      "needsInterop": true
+    },
+    "js-base64": {
+      "src": "../../../../../node_modules/js-base64/base64.mjs",
+      "file": "js-base64.js",
+      "fileHash": "5d2c204a",
+      "needsInterop": false
+    },
+    "uview-plus": {
+      "src": "../../../../../node_modules/uview-plus/index.js",
+      "file": "uview-plus.js",
+      "fileHash": "cde5f5c4",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TDUMLE5V": {
+      "file": "chunk-TDUMLE5V.js"
+    }
+  }
+}

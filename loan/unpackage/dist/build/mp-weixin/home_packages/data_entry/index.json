@@ -1,0 +1,19 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "数据录入",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "../../components/navbar",
+    "information": "../../components/data_components/information",
+    "information1": "../../components/data_components/information1",
+    "detailed": "../../components/data_components/detailed",
+    "detailed1": "../../components/data_components/detailed1",
+    "borrowing": "../../components/data_components/borrowing",
+    "borrower": "../../components/data_components/borrower",
+    "rongdan": "../../components/data_components/rongdan",
+    "houseproperty": "../../components/data_components/houseproperty",
+    "otherinfo": "../../components/data_components/otherinfo",
+    "confirminfo": "../../components/data_components/confirminfo",
+    "finish": "../../components/data_components/finish"
+  }
+}

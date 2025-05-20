@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "签约宝",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-icon": "../../node-modules/uview-plus/components/u-icon/u-icon",
+    "navbar": "../../components/navbar"
+  }
+}

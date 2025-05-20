@@ -1,0 +1,1 @@
+"use strict";const e=require("../common/vendor.js");exports.back=function(){e.index.navigateBack()},exports.cardUtil=function(e){if(e)return e.substr(0,5)+"****"+e.substr(e.length-4)},exports.navigateTo=function(n,t={}){var r;(!0!==t||e.index.getStorageSync("userInfo"))&&e.index.navigateTo({url:`${n}?${(r=t,Object.keys(r)).map((e=>`${e}=${t[e]}`)).join("&")}`})};

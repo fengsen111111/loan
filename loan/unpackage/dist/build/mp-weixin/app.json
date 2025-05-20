@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "pages/user_home/index",
+    "pages/home/index",
+    "pages/work/index",
+    "pages/mine/index",
+    "pages/rich_text/index",
+    "pages/web_view/index"
+  ],
+  "subPackages": [
+    {
+      "root": "home_packages",
+      "pages": [
+        "signing/index",
+        "contract/index",
+        "autograph/index",
+        "service/index",
+        "service_form/index",
+        "service_sign/index",
+        "assistant/index",
+        "record/index",
+        "details/index",
+        "data_entry/index",
+        "select_bank_card/index",
+        "add_bank_card/index",
+        "add_personal/index",
+        "add_enterprise/index",
+        "add_house/index",
+        "ownership/index",
+        "weituo_person/index"
+      ]
+    },
+    {
+      "root": "work_packages",
+      "pages": [
+        "submitted/index",
+        "grab/index",
+        "backlog/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "mine_packages",
+      "pages": [
+        "signing/index",
+        "order_detail/index",
+        "schedule/index",
+        "progress_list/index",
+        "message/index",
+        "authentication/index",
+        "phone_auth/index",
+        "realname_auth/index",
+        "wechat_auth/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#F97E39",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home_active.png",
+        "pagePath": "pages/user_home/index"
+      },
+      {
+        "text": "首页",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home_active.png",
+        "pagePath": "pages/home/index"
+      },
+      {
+        "text": "工作台",
+        "iconPath": "static/work.png",
+        "selectedIconPath": "static/work_active.png",
+        "pagePath": "pages/work/index"
+      },
+      {
+        "text": "我的",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_active.png",
+        "pagePath": "pages/mine/index"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,25 @@
+{
+  "hash": "5f7556bb",
+  "configHash": "ffafef84",
+  "lockfileHash": "bb9ca045",
+  "browserHash": "4f47e2d4",
+  "optimized": {
+    "crypto-js": {
+      "src": "../../../../../node_modules/crypto-js/index.js",
+      "file": "crypto-js.js",
+      "fileHash": "0c0dbd86",
+      "needsInterop": true
+    },
+    "js-base64": {
+      "src": "../../../../../node_modules/js-base64/base64.mjs",
+      "file": "js-base64.js",
+      "fileHash": "39962c1d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TDUMLE5V": {
+      "file": "chunk-TDUMLE5V.js"
+    }
+  }
+}

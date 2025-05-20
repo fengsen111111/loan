@@ -1,0 +1,1 @@
+<view class="bottom_bt" style="{{'padding-bottom:' + k}}"><view wx:if="{{a}}" class="cancel" style="{{'background:' + c + ';' + ('color:' + d)}}" bindtap="{{e}}">{{b}}</view><view class="confirm" style="{{'background:' + g + ';' + ('color:' + h) + ';' + ('width:' + i)}}" bindtap="{{j}}">{{f}}</view></view>

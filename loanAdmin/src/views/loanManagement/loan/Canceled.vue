@@ -116,14 +116,14 @@
 		<a-modal :visible="txVis" title="提现放款" @ok="handleTx" @cancel="cancelTx">
 			<a-row class="grid-demo">
 				<!-- <a-col :span="24"> -->
-					<!-- <div style="display: flex; width: 400px"> -->
-						<!-- <span style="width:110px">助贷方名称:</span> -->
-						<!-- <span style="width:110px">借款人名称:</span> -->
-						<!-- <span style="width:110px">收款信息:</span> -->
-						<!-- <a-cascader :options="capitalList" :field-names="fieldNames" v-model="Form.capital_id"
+				<!-- <div style="display: flex; width: 400px"> -->
+				<!-- <span style="width:110px">助贷方名称:</span> -->
+				<!-- <span style="width:110px">借款人名称:</span> -->
+				<!-- <span style="width:110px">收款信息:</span> -->
+				<!-- <a-cascader :options="capitalList" :field-names="fieldNames" v-model="Form.capital_id"
 	          placeholder="请选择助贷方" /> -->
-						<!-- <div>{{ fieldName }}</div> -->
-					<!-- </div> -->
+				<!-- <div>{{ fieldName }}</div> -->
+				<!-- </div> -->
 				<!-- </a-col> -->
 				<a-col :span="24">
 					<div style="display: flex; width: 400px">
@@ -147,7 +147,8 @@
 					<div style="display: flex; width: 400px">
 						<span style="width:110px">放款金额:</span>
 						<div>
-							<a-input v-model="widMoney" placeholder="请输入金额" disabled type="number" allow-clear> </a-input>
+							<a-input v-model="widMoney" placeholder="请输入金额" disabled type="number" allow-clear>
+							</a-input>
 							<div>{{ numberToChinese(widMoney) }}</div>
 						</div>
 					</div>
@@ -255,7 +256,34 @@
 		wid_id.value = item.id
 		// txVis.value = true
 	}
-	async function handleTx() {
+
+	// const interval = ref()
+	// function handleTx() {
+	// 	if (interval.value) {
+	// 		clearInterval(interval.value);
+	// 	}
+
+	// 	interval.value = setTimeout(() => {
+	// 		handleTx_model()
+	// 	}, 2000)
+	// }
+	// let lastExecuted = 0;
+	// function handleTx() {
+	// 	const now = Date.now();
+	// 	if (now - lastExecuted > 3000) {
+	// 		lastExecuted = now;
+	// 		handleTx_model();
+	// 	}
+	// }
+	const isWithdrawing = ref(false); // 节流锁
+
+	function handleTx() {
+		if (isWithdrawing.value) return; // 锁定中，忽略点击
+		isWithdrawing.value = true; // 上锁
+		handleTx_model();
+	}
+
+	async function handleTx_model() {
 		if (!widMoney.value) {
 			Message.error('请输入提现金额')
 			return false
@@ -271,8 +299,12 @@
 			cancelTx()
 		} catch (error) {
 			console.log('失败');
+			cancelTx()
 			return false
+		} finally {
+			isWithdrawing.value = false; // 无论成功失败，最后都要解锁
 		}
+
 		// const res = await withdrawalMoney({
 		// 	post_params: {
 		// 		order_id: wid_id.value,
@@ -288,6 +320,7 @@
 		wid_id.value = ''
 		fieldName.value = ''
 		txVis.value = false
+		search()
 	}
 
 

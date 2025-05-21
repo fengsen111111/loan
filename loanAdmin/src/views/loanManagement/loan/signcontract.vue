@@ -121,14 +121,9 @@
 
 			<template #action="{ record }">
 				<a-space> <a-link @click="showModal1(record)">放款</a-link> </a-space>
-				<a-popconfirm
-			      	content="确定要执行该操作 ?"
-              ok-text="确定"
-              cancel-text="取消"
-              @ok="cancelFK(record)"
-            >
-              <a-link> 结束放款 </a-link>
-            </a-popconfirm>
+				<a-popconfirm content="确定要执行该操作 ?" ok-text="确定" cancel-text="取消" @ok="cancelFK(record)">
+					<a-link> 结束放款 </a-link>
+				</a-popconfirm>
 				<a-space> <a-link @click="showModal(record)">详情 </a-link> </a-space>
 				<a-space> <a-link @click="showModal2(record)">合同详情 </a-link> </a-space>
 			</template>
@@ -398,8 +393,24 @@
 		detailCon.value = item
 		open1.value = true
 	}
+
+	// const interval = ref()
+	// function handleOk1() {
+	// 	if (interval.value) {
+	// 		clearInterval(interval.value);
+	// 	}
+	// 	interval.value = setTimeout(() => {
+	// 		handleOk1_model()
+	// 	}, 2000)
+	// }
+	const isThrottling = ref(false); // 节流锁
+	function handleOk1() {
+		if (isThrottling.value) return; // 已在节流中，直接返回
+		isThrottling.value = true; // 开启节流锁
+		handleOk1_model();
+	}
 	//放款
-	const handleOk1 = async () => {
+	const handleOk1_model = async () => {
 		try {
 			await choiceCapitalAndPay({
 				post_params: {
@@ -410,11 +421,13 @@
 				}
 			})
 			Message.success('放款成功')
-			search()
 			emit('save-success')
 			return true
 		} catch (error) {
 			return false
+		} finally {
+			disDigo();              // 清理 loading 或其他状态
+			isThrottling.value = false; // 关闭节流锁
 		}
 	}
 	//关闭弹窗
@@ -423,6 +436,7 @@
 		Form.value.type = ''
 		Form.value.price = ''
 		open1.value = false
+		search()
 	}
 	//关闭
 	const handleOk = () => {

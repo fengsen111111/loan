@@ -42,7 +42,7 @@
 			<information1 v-if="state.com_type===2" showFlag></information1>
 			<detailed v-if="state.com_type===1" showFlag></detailed>
 			<detailed1 v-if="state.com_type===2" showFlag></detailed1>
-			<!-- <bankcard showFlag></bankcard> -->
+			<bankcard showFlag></bankcard>
 			<borrowing showFlag></borrowing>
 			<borrower showFlag></borrower>
 			<rongdan showFlag></rongdan>
@@ -151,7 +151,7 @@
 	import information1 from "@/components/data_components/information1.vue";
 	import detailed from "@/components/data_components/detailed.vue";
 	import detailed1 from "@/components/data_components/detailed1.vue";
-	// import bankcard from "@/components/data_components/bankcard.vue";
+	import bankcard from "@/components/data_components/bankcard.vue";
 	import borrowing from "@/components/data_components/borrowing.vue";
 	import borrower from "@/components/data_components/borrower.vue"
 	import rongdan from "@/components/data_components/rongdan.vue";

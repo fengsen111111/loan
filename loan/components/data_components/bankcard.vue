@@ -24,33 +24,33 @@
 		<view class="content">
 			<view class="label">银行卡核身</view>
 			<view class="info_item">
-				<view class="label" data-required>账户名</view>
+				<view class="label">账户名</view>
 				<view class="value" style="border-bottom:none">
 					{{state.orderInfo.name}}
 				</view>
 			</view>
 			<view class="info_item">
-				<view class="label" data-required>证件号</view>
+				<view class="label">证件号</view>
 				<view class="value" style="border-bottom:none">
 					{{state.orderInfo.id_card}}
 				</view>
 			</view>
 			<view class="info_item">
-				<view class="label" data-required>银行卡号</view>
+				<view class="label">银行卡号</view>
 				<view class="value">
 					<input type="text" placeholder="请输入银行卡号" v-model="formData.bank_number" :disabled="props.showFlag">
 					<image src="@/static/scans.png" mode="" @click="openScan()"></image>
 				</view>
 			</view>
 			<view class="info_item" @click="showPicker()">
-				<view class="label" data-required>开户银行</view>
+				<view class="label">开户银行</view>
 				<view class="value" style="border-bottom:none">
 					<text>{{formData.bank_name}}</text>
 					<u-icon name="arrow-down" size="5vw" color="#666666"></u-icon>
 				</view>
 			</view>
 			<view class="info_item">
-				<view class="label" data-required>手机号</view>
+				<view class="label">手机号</view>
 				<view class="value">
 					<input type="number" placeholder="请输入手机号" v-model="formData.bank_mobile" maxlength="11"
 						:disabled="props.showFlag">
@@ -185,10 +185,10 @@
 		// 	formData.bank_verify_code = "";
 		// 	return;
 		// }
-		if (formData.bank_name === "" || formData.bank_number === "" || formData.bank_mobile === "") {
-			openTips("资料未填写完成");
-			return;
-		}
+		// if (formData.bank_name === "" || formData.bank_number === "" || formData.bank_mobile === "") {
+		// 	openTips("资料未填写完成");
+		// 	return;
+		// }
 		globalProxy.$request("/loan/Order/makeOrder", {
 			id: uni.getStorageSync("order_id"),
 			page_number: 3,

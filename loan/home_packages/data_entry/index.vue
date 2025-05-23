@@ -5,15 +5,15 @@
 		<information1 v-if="state.step===1&&props.type===2" @next="nextStep()"></information1>
 		<detailed v-if="state.step===2&&props.type===1" @next="nextStep()"></detailed>
 		<detailed1 v-if="state.step===2&&props.type===2" @next="nextStep()"></detailed1>
-		<!-- <bankcard v-if="state.step===3" @next="nextStep()"></bankcard> -->
-		<borrowing v-if="state.step===3" @next="nextStep()"></borrowing>
-		<borrower v-if="state.step===4" @next="nextStep()"></borrower>
-		<rongdan v-if="state.step===5" @next="nextStep()"></rongdan>
-		<houseproperty v-if="state.step===6" @next="nextStep()"></houseproperty>
+		<bankcard v-if="state.step===3" @next="nextStep()"></bankcard>
+		<borrowing v-if="state.step===4" @next="nextStep()"></borrowing>
+		<borrower v-if="state.step===5" @next="nextStep()"></borrower>
+		<rongdan v-if="state.step===6" @next="nextStep()"></rongdan>
+		<houseproperty v-if="state.step===7" @next="nextStep()"></houseproperty>
 		<!-- <capture v-if="state.step===8" @next="nextStep()"></capture> -->
-		<otherinfo v-if="state.step===7" @next="nextStep()"></otherinfo>
-		<confirminfo :type="props.type" v-if="state.step===8" @next="nextStep()" @back="state.step=1"></confirminfo>
-		<finish v-if="state.step===9" @next="nextStep()"></finish>
+		<otherinfo v-if="state.step===8" @next="nextStep()"></otherinfo>
+		<confirminfo :type="props.type" v-if="state.step===9" @next="nextStep()" @back="state.step=1"></confirminfo>
+		<finish v-if="state.step===10" @next="nextStep()"></finish>
 	</view>
 </template>
 <!--创建时间：2024-03-29 10:31:30-->
@@ -23,7 +23,7 @@
 	import information1 from "@/components/data_components/information1.vue";
 	import detailed from "@/components/data_components/detailed.vue";
 	import detailed1 from "@/components/data_components/detailed1.vue";
-	// import bankcard from "@/components/data_components/bankcard.vue";
+	import bankcard from "@/components/data_components/bankcard.vue";
 	import borrowing from "@/components/data_components/borrowing.vue";
 	import borrower from "@/components/data_components/borrower.vue"
 	import rongdan from "@/components/data_components/rongdan.vue";
@@ -54,7 +54,7 @@
 	uni.setStorageSync("goods_id", props.id)
 
 	const nextStep = () => {
-		if (state.step === 9) {
+		if (state.step === 10) {
 			uni.switchTab({
 				url: "/pages/home/index"
 			})

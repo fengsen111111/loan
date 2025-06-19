@@ -73,6 +73,7 @@
 				<view class="title">切换经纪人端</view>
 				<u-icon name="arrow-right" size="5vw" color="#666666"></u-icon>
 			</view>
+			
 			<!-- <view class="" @click="$navigateTo('/home_packages/data_entry/index')">
 				数据录入
 			</view> -->

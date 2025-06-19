@@ -81,20 +81,26 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const ToString = (n) => {
       if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n)) {
         state.dxMoney = "数据非法";
-        return false;
+        return "数据非法";
       }
-      var unit = "千佰拾亿千佰拾万千佰拾元角分", str = "";
-      n += "00";
-      var indexpoint = n.indexOf(".");
+      const digit = "零壹贰叁肆伍陆柒捌玖";
+      const unit = "仟佰拾亿仟佰拾万仟佰拾元角分";
+      let str = "";
+      n = n.toString();
+      const indexpoint = n.indexOf(".");
       if (indexpoint >= 0) {
-        n = n.substring(0, indexpoint) + n.substr(indexpoint + 1, 2);
+        const integer = n.substring(0, indexpoint);
+        const decimal = n.substr(indexpoint + 1, 2).padEnd(2, "0");
+        n = integer + decimal;
+      } else {
+        n = n + "00";
       }
-      unit = unit.substr(unit.length - n.length);
-      for (var i = 0; i < n.length; i++) {
-        str += "零壹贰叁肆伍陆柒捌玖".charAt(n.charAt(i)) + unit.charAt(i);
+      const unitSlice = unit.substr(unit.length - n.length);
+      for (let i = 0; i < n.length; i++) {
+        const num = parseInt(n.charAt(i), 10);
+        str += digit.charAt(num) + unitSlice.charAt(i);
       }
-      state.dxMoney = str.replace(/零(千|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
-      return false;
+      state.dxMoney = str.replace(/零(仟|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
     };
     const deleteInfo = (index) => {
       formData.owners.splice(index, 1);

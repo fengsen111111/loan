@@ -106,7 +106,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             }),
             d: common_vendor.t(item.address)
           }, !props.showFlag ? {
-            e: common_assets._imports_0$9,
+            e: common_assets._imports_0$10,
             f: common_vendor.o(($event) => changeHouse(index), index),
             g: "09f9b2a4-0-" + i0,
             h: common_vendor.p({

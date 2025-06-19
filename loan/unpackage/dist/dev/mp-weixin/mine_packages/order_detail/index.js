@@ -9,12 +9,13 @@ if (!Array) {
 const _easycom_u_read_more = () => "../../node-modules/uview-plus/components/u-read-more/u-read-more.js";
 const _easycom_u_icon = () => "../../node-modules/uview-plus/components/u-icon/u-icon.js";
 if (!Math) {
-  (navbar + information + information1 + detailed + detailed1 + borrowing + borrower + rongdan + houseproperty + capture + otherinfo + _easycom_u_read_more + _easycom_u_icon)();
+  (navbar + information + information1 + detailed + detailed1 + bankcard + borrowing + borrower + rongdan + houseproperty + capture + otherinfo + _easycom_u_read_more + _easycom_u_icon)();
 }
 const information = () => "../../components/data_components/information.js";
 const information1 = () => "../../components/data_components/information1.js";
 const detailed = () => "../../components/data_components/detailed.js";
 const detailed1 = () => "../../components/data_components/detailed1.js";
+const bankcard = () => "../../components/data_components/bankcard.js";
 const borrowing = () => "../../components/data_components/borrowing.js";
 const borrower = () => "../../components/data_components/borrower.js";
 const rongdan = () => "../../components/data_components/rongdan.js";
@@ -132,6 +133,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           showFlag: true
         }),
         A: common_vendor.p({
+          showFlag: true
+        }),
+        B: common_vendor.p({
           closeText: "更多信息",
           openText: "收起更多",
           showHeight: "240",
@@ -139,20 +143,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           toggle: true,
           textIndent: "0px"
         }),
-        B: state.info.id
+        C: state.info.id
       }, state.info.id ? common_vendor.e({
-        C: state.type[state.info.status] > 1
+        D: state.type[state.info.status] > 1
       }, state.type[state.info.status] > 1 ? {} : {}, {
-        D: state.type[state.info.status] === 1
+        E: state.type[state.info.status] === 1
       }, state.type[state.info.status] === 1 ? {
-        E: common_vendor.p({
+        F: common_vendor.p({
           name: "checkmark-circle-fill",
           size: "5vw",
           color: "#F97E39"
         })
       } : {}, {
-        F: common_vendor.n(state.type[state.info.status] > 2 ? "finish" : ""),
-        G: common_vendor.f(state.info.check_logs, (i, j, i0) => {
+        G: common_vendor.n(state.type[state.info.status] > 2 ? "finish" : ""),
+        H: common_vendor.f(state.info.check_logs, (i, j, i0) => {
           return common_vendor.e({
             a: state.type[state.info.status] !== 2 || j < state.info.check_logs.length - 1
           }, state.type[state.info.status] !== 2 || j < state.info.check_logs.length - 1 ? {
@@ -161,7 +165,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           } : {}, {
             d: state.type[state.info.status] === 2 && j === state.info.check_logs.length - 1
           }, state.type[state.info.status] === 2 && j === state.info.check_logs.length - 1 ? {
-            e: "73ef3f07-13-" + i0,
+            e: "73ef3f07-14-" + i0,
             f: common_vendor.p({
               name: "checkmark-circle-fill",
               size: "5vw",
@@ -171,58 +175,58 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             g: j
           });
         }),
-        H: state.type[state.info.status] !== 3
+        I: state.type[state.info.status] !== 3
       }, state.type[state.info.status] !== 3 ? {
-        I: common_vendor.t(state.info.check_logs.length + 2),
-        J: common_vendor.n(state.type[state.info.status] > 3 ? "finish" : "")
+        J: common_vendor.t(state.info.check_logs.length + 2),
+        K: common_vendor.n(state.type[state.info.status] > 3 ? "finish" : "")
       } : {}, {
-        K: common_vendor.n(state.type[state.info.status] > 3 ? "finish" : ""),
-        L: state.type[state.info.status] !== 4
+        L: common_vendor.n(state.type[state.info.status] > 3 ? "finish" : ""),
+        M: state.type[state.info.status] !== 4
       }, state.type[state.info.status] !== 4 ? {
-        M: common_vendor.t(state.info.check_logs.length + 3),
-        N: common_vendor.n(state.type[state.info.status] > 4 ? "finish" : "")
+        N: common_vendor.t(state.info.check_logs.length + 3),
+        O: common_vendor.n(state.type[state.info.status] > 4 ? "finish" : "")
       } : {}, {
-        O: common_vendor.n(state.type[state.info.status] > 4 ? "finish" : ""),
-        P: state.leftheight + "px",
-        Q: state.type[state.info.status] === 1
+        P: common_vendor.n(state.type[state.info.status] > 4 ? "finish" : ""),
+        Q: state.leftheight + "px",
+        R: state.type[state.info.status] === 1
       }, state.type[state.info.status] === 1 ? {
-        R: common_vendor.t(state.info.businesser_name)
+        S: common_vendor.t(state.info.businesser_name)
       } : {}, {
-        S: state.type[state.info.status] > 1
+        T: state.type[state.info.status] > 1
       }, state.type[state.info.status] > 1 ? {
-        T: common_vendor.t(state.info.create_time),
-        U: common_vendor.t(state.info.businesser_name)
+        U: common_vendor.t(state.info.create_time),
+        V: common_vendor.t(state.info.businesser_name)
       } : {}, {
-        V: state.type[state.info.status] === 1
+        W: state.type[state.info.status] === 1
       }, state.type[state.info.status] === 1 ? {} : {}, {
-        W: state.type[state.info.status] === 2 && state.info.checker_id == 0
+        X: state.type[state.info.status] === 2 && state.info.checker_id == 0
       }, state.type[state.info.status] === 2 && state.info.checker_id == 0 ? {} : {}, {
-        X: state.type[state.info.status] === 2 && state.info.checker_id > 0
+        Y: state.type[state.info.status] === 2 && state.info.checker_id > 0
       }, state.type[state.info.status] === 2 && state.info.checker_id > 0 ? {
-        Y: common_vendor.t(state.info.checker_name)
+        Z: common_vendor.t(state.info.checker_name)
       } : {}, {
-        Z: state.type[state.info.status] > 2
+        aa: state.type[state.info.status] > 2
       }, state.type[state.info.status] > 2 ? {
-        aa: common_vendor.t(state.info.checker_name)
+        ab: common_vendor.t(state.info.checker_name)
       } : {}, {
-        ab: state.type[state.info.status] < 3
+        ac: state.type[state.info.status] < 3
       }, state.type[state.info.status] < 3 ? {} : {}, {
-        ac: state.type[state.info.status] === 3
+        ad: state.type[state.info.status] === 3
       }, state.type[state.info.status] === 3 ? {} : {}, {
-        ad: state.type[state.info.status] > 3
+        ae: state.type[state.info.status] > 3
       }, state.type[state.info.status] > 3 ? {} : {}, {
-        ae: common_vendor.n(state.type[state.info.status] === 3 ? "current" : state.type[state.info.status] > 3 ? "finish1" : ""),
-        af: state.type[state.info.status] < 4
+        af: common_vendor.n(state.type[state.info.status] === 3 ? "current" : state.type[state.info.status] > 3 ? "finish1" : ""),
+        ag: state.type[state.info.status] < 4
       }, state.type[state.info.status] < 4 ? {} : {}, {
-        ag: state.info.status === "d"
+        ah: state.info.status === "d"
       }, state.info.status === "d" ? {} : {}, {
-        ah: state.info.status === "e"
+        ai: state.info.status === "e"
       }, state.info.status === "e" ? {} : {}, {
-        ai: state.info.status === "f"
+        aj: state.info.status === "f"
       }, state.info.status === "f" ? {} : {}, {
-        aj: state.info.status === "g"
+        ak: state.info.status === "g"
       }, state.info.status === "g" ? {} : {}, {
-        ak: common_vendor.n(state.type[state.info.status] === 4 ? "current" : state.type[state.info.status] > 4 ? "finish1" : "")
+        al: common_vendor.n(state.type[state.info.status] === 4 ? "current" : state.type[state.info.status] > 4 ? "finish1" : "")
       }) : {});
     };
   }

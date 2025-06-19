@@ -1,13 +1,14 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 if (!Math) {
-  (navbar + information + information1 + detailed + detailed1 + borrowing + borrower + rongdan + houseproperty + otherinfo + confirminfo + finish)();
+  (navbar + information + information1 + detailed + detailed1 + bankcard + borrowing + borrower + rongdan + houseproperty + otherinfo + confirminfo + finish)();
 }
 const navbar = () => "../../components/navbar.js";
 const information = () => "../../components/data_components/information.js";
 const information1 = () => "../../components/data_components/information1.js";
 const detailed = () => "../../components/data_components/detailed.js";
 const detailed1 = () => "../../components/data_components/detailed1.js";
+const bankcard = () => "../../components/data_components/bankcard.js";
 const borrowing = () => "../../components/data_components/borrowing.js";
 const borrower = () => "../../components/data_components/borrower.js";
 const rongdan = () => "../../components/data_components/rongdan.js";
@@ -36,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const props = __props;
     common_vendor.index.setStorageSync("goods_id", props.id);
     const nextStep = () => {
-      if (state.step === 9) {
+      if (state.step === 10) {
         common_vendor.index.switchTab({
           url: "/pages/home/index"
         });
@@ -87,15 +88,19 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } : {}, {
         t: state.step === 8
       }, state.step === 8 ? {
-        v: common_vendor.o(($event) => nextStep()),
-        w: common_vendor.o(($event) => state.step = 1),
-        x: common_vendor.p({
+        v: common_vendor.o(($event) => nextStep())
+      } : {}, {
+        w: state.step === 9
+      }, state.step === 9 ? {
+        x: common_vendor.o(($event) => nextStep()),
+        y: common_vendor.o(($event) => state.step = 1),
+        z: common_vendor.p({
           type: props.type
         })
       } : {}, {
-        y: state.step === 9
-      }, state.step === 9 ? {
-        z: common_vendor.o(($event) => nextStep())
+        A: state.step === 10
+      }, state.step === 10 ? {
+        B: common_vendor.o(($event) => nextStep())
       } : {});
     };
   }

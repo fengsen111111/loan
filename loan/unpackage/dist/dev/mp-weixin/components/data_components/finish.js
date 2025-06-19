@@ -15,7 +15,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     return (_ctx, _cache) => {
       return {
-        a: common_assets._imports_0$10,
+        a: common_assets._imports_0$11,
         b: common_vendor.o(($event) => nextStep()),
         c: common_vendor.p({
           confirmText: "返回首页",

@@ -250,25 +250,54 @@
 		ToString(formData.apply_money)
 	}
 
-	const ToString = (n : any) => {
+	// const ToString = (n : any) => {
+	// 	if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n)) {
+	// 		state.dxMoney = "数据非法"; // 判断数据是否大于0
+	// 		return false
+	// 	}
+	// 	var unit = "千佰拾亿千佰拾万千佰拾元角分", str = "";
+	// 	n += "00";
+	// 	var indexpoint = n.indexOf('.');
+	// 	// 如果是小数，截取小数点前面的位数
+	// 	if (indexpoint >= 0) {
+	// 		n = n.substring(0, indexpoint) + n.substr(indexpoint + 1, 2);
+	// 	}
+	// 	unit = unit.substr(unit.length - n.length);
+	// 	for (var i = 0; i < n.length; i++) {
+	// 		str += "零壹贰叁肆伍陆柒捌玖".charAt(n.charAt(i)) + unit.charAt(i); // 遍历转化为大写的数字
+	// 	}
+	// 	state.dxMoney = str.replace(/零(千|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整"); // 替换掉数字里面的零字符，得到结果
+	// 	return false
+	// }
+	const ToString = (n : any) : string => {
 		if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n)) {
-			state.dxMoney = "数据非法"; // 判断数据是否大于0
-			return false
+			state.dxMoney = "数据非法";
+			return "数据非法";
 		}
-		var unit = "千佰拾亿千佰拾万千佰拾元角分", str = "";
-		n += "00";
-		var indexpoint = n.indexOf('.');
-		// 如果是小数，截取小数点前面的位数
+		const digit = "零壹贰叁肆伍陆柒捌玖";
+		const unit = "仟佰拾亿仟佰拾万仟佰拾元角分";
+		let str = "";
+		n = n.toString();
+		const indexpoint = n.indexOf(".");
 		if (indexpoint >= 0) {
-			n = n.substring(0, indexpoint) + n.substr(indexpoint + 1, 2);
+			const integer = n.substring(0, indexpoint);
+			const decimal = n.substr(indexpoint + 1, 2).padEnd(2, "0"); // 保留两位
+			n = integer + decimal;
+		} else {
+			n = n + "00";
 		}
-		unit = unit.substr(unit.length - n.length);
-		for (var i = 0; i < n.length; i++) {
-			str += "零壹贰叁肆伍陆柒捌玖".charAt(n.charAt(i)) + unit.charAt(i); // 遍历转化为大写的数字
+		const unitSlice = unit.substr(unit.length - n.length);
+		for (let i = 0; i < n.length; i++) {
+			const num = parseInt(n.charAt(i), 10);
+			str += digit.charAt(num) + unitSlice.charAt(i);
 		}
-		state.dxMoney = str.replace(/零(千|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整"); // 替换掉数字里面的零字符，得到结果
-		return false
-	}
+		state.dxMoney = str
+			.replace(/零(仟|佰|拾|角)/g, "零")
+			.replace(/(零)+/g, "零")
+			.replace(/零(万|亿|元)/g, "$1")
+			.replace(/^元零?|零分/g, "")
+			.replace(/元$/g, "元整");
+	};
 
 
 	const nextStep = () => {
@@ -324,7 +353,7 @@
 	const addMonthsChange = (date, months) => {
 		const newDate = new Date(date); // 创建原始日期的副本
 		const d = newDate.getDate();
-		newDate.setMonth(newDate.getMonth() + months*1);
+		newDate.setMonth(newDate.getMonth() + months * 1);
 		// 修复日期越界问题（比如从1月31日加一个月 -> 变成3月2日）
 		if (newDate.getDate() !== d) {
 			newDate.setDate(0); // 设为上月最后一天

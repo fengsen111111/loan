@@ -74,6 +74,9 @@
 				<u-icon name="arrow-right" size="5vw" color="#666666"></u-icon>
 			</view>
 			
+			<!-- <view class="" @click="$navigateTo('/home_packages/add_house/index')">
+				评估价格
+			</view> -->
 			<!-- <view class="" @click="$navigateTo('/home_packages/data_entry/index')">
 				数据录入
 			</view> -->

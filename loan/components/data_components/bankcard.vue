@@ -135,6 +135,16 @@
 			if (res.data.order_material.length === 0) return;
 			Object.assign(formData, res.data.order_material);
 		})
+		globalProxy.$request("/loan/Order/getOrderDetail", {
+			order_id: uni.getStorageSync("order_id"),
+			page_number: 1
+		}).then((res : Result) => {
+			// console.log('银行卡核身', res.data.order_material);
+			state.orderInfo = {
+				name: res.data.order_material.name,
+				id_card: res.data.order_material.card_number,
+			}
+		})
 	})
 
 

@@ -54,6 +54,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return;
         Object.assign(formData, res.data.order_material);
       });
+      globalProxy.$request("/loan/Order/getOrderDetail", {
+        order_id: common_vendor.index.getStorageSync("order_id"),
+        page_number: 1
+      }).then((res) => {
+        state.orderInfo = {
+          name: res.data.order_material.name,
+          id_card: res.data.order_material.card_number
+        };
+      });
     });
     const showPicker = () => {
       if (props.showFlag)

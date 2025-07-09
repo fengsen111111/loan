@@ -1,6 +1,7 @@
 <template>
 	<view class="container">
 		<navbar title="订单详情"></navbar>
+		<!-- {{props.type}} -->
 		<!-- 注意：需要更改uview-plus源码 -->
 		<u-read-more closeText="更多信息" openText="收起更多" showHeight="240" color="#FF8177" toggle textIndent="0px">
 			<view class="infoBox" v-if="state.info.order_material">

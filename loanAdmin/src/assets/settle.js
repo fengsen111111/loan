@@ -230,7 +230,7 @@ export const zqzrxy = (data) => {
         <div style="position: relative;">
           <p>甲方： 成都市彭州仟加源小额贷款有限责任公司</p>
           <p>签订日期：${data.time}</p>
-          <img style="width: 130px;height: 130px; position: absolute; left: 160px;top:-40px" src="http://localhost:5174/src/assets/seal.png" />
+          <img style="width: 130px;height: 130px; position: absolute; left: 160px;top:-40px" src="${sealImg}" />
         </div>
         <div style="height:60px"></div>
         <div style="position: relative;">
@@ -294,7 +294,7 @@ export const zqzrxy = (data) => {
             <tr>
               <td style="padding: 6px 8px;" colspan="2">
                 <div>债权转让方：（盖章）</div>
-                <img style="width: 200px;height: 200px;" src="http://localhost:5174/src/assets/seal.png" />
+                <img style="width: 200px;height: 200px;" src="${sealImg}" />
               </td>
               <td style="padding: 6px 8px;" colspan="2">
                 <div>债权受让方：（盖章）</div>

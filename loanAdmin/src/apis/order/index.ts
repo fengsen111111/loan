@@ -41,6 +41,12 @@ export function getRandom(query) {
 export function choiceCapitalAndPay(query) {
   return http.post(`${BASE_URL}/Order/choiceCapitalAndPay`, query)
 }
+
+/** @desc 获取转载信息*/
+export function _getMoveMsg(query) {
+  return http.post(`${BASE_URL}/Order/getMoveMsg`, query)
+}
+
 /** @desc 获取指定的助贷方转账记录列表*/
 export function getTransferAccountsList(query) {
   return http.post(`${BASE_URL}/Capital/getTransferAccountsList`, query)

@@ -134,6 +134,7 @@
         </a-space>
         <a-space> <a-link @click="showModal2(record)">合同详情 </a-link> </a-space>
         <a-space> <a-link @click="showModal1(record)">结清证明</a-link> </a-space>
+        <a-space v-if="record.status == 'f'" @click="zqzrCli(record)"> <a-link>转债</a-link> </a-space>
       </template>
     </GiTable>
     <a-modal :visible="open" title="详情" @ok="handleOk" width="40%" @cancel="open = false">
@@ -158,7 +159,6 @@
         <a-button key="submit" type="primary" @click="open2 = false">关闭</a-button>
       </template>
     </a-modal>
-    <div @click="zqzrCli">qweqa1</div>
   </div>
 </template>
 
@@ -170,7 +170,8 @@ import {
   storeGetOrderDetail,
   listRole,
   getStoreCapitalList,
-  choiceCapitalAndPay
+  choiceCapitalAndPay,
+  _getMoveMsg
 } from '@/apis'
 import { getSettle } from "@/assets/settle.js"
 import { Message } from '@arco-design/web-vue'
@@ -369,7 +370,6 @@ const showModal = async (item) => {
 //下载合同
 
 const showdownload = async (item) => {
-
   if (item.url.length == 0) return Message.error('暂无合同记录')
   // 生成或获取文件 URL 
   const fileUrl = item.url
@@ -396,13 +396,23 @@ const showModal1 = async (item) => {
 }
 import { zqzrxy } from "@/assets/settle.js"
 const zqzrCli = async (item) => {
-  console.log('债权转让',item);
-  zqzrxy(item).then((res: any) => {
-    // console.log(res)
-    if (res.url) {
-      downloadBlob(res.url, '债权转让')
+  // console.log('债权转让',item);
+  const params = new URL(item.detail_url).searchParams
+  const orderId = params.get('order_id')
+  let resule = await _getMoveMsg({
+    post_params:{
+      order_id:orderId
     }
   })
+  console.log('转载信息',resule);
+  
+
+  // zqzrxy(item,'').then((res: any) => {
+  //   console.log(res)
+  //   // if (res.url) {
+  //   //   downloadBlob(res.url, '债权转让')
+  //   // }
+  // })
 
 }
 

@@ -129,25 +129,56 @@ export const getSettle = (data) => {
     })
   })
 }
+
+function ToString(n) {
+  if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n)) {
+    return "数据非法";
+  }
+  const digit = "零壹贰叁肆伍陆柒捌玖";
+  const unit = "仟佰拾亿仟佰拾万仟佰拾元角分";
+  let str = "";
+  n = n.toString();
+  const indexpoint = n.indexOf(".");
+  if (indexpoint >= 0) {
+    const integer = n.substring(0, indexpoint);
+    const decimal = n.substr(indexpoint + 1, 2).padEnd(2, "0"); // 保留两位
+    n = integer + decimal;
+  } else {
+    n = n + "00";
+  }
+  const unitSlice = unit.substr(unit.length - n.length);
+  for (let i = 0; i < n.length; i++) {
+    const num = parseInt(n.charAt(i), 10);
+    str += digit.charAt(num) + unitSlice.charAt(i);
+  }
+  return str
+    .replace(/零(仟|佰|拾|角)/g, "零")
+    .replace(/(零)+/g, "零")
+    .replace(/零(万|亿|元)/g, "$1")
+    .replace(/^元零?|零分/g, "")
+    .replace(/元$/g, "元整");
+};
+
 import jsPDF from 'jspdf'
 // 债权转让协议
 export const zqzrxy = (data) => {  
+  data.dxMoney = ToString(data.pay_price*1)
   return new Promise((resolve, reject) => {
     let title = `<p style="text-align: center;font-size: 30px;margin-bottom: 30px;font-weight: bold">债权转让协议</p>`
     let info = ``
       info += `
       <div style="text-indent: 2em;line-height: 21px">
-        <p>J0707-4</p>
+        <p>${data.move_num}</p>
         <p style="text-align: right;">协议签订地： 四川成都</p>
         <p><b>甲方（债权转让方）：</b>成都市彭州仟加源小额贷款有限责任公司</p>
         <p>法定代表人:  冯勇</p>
         <p>联系地址：成都市彭州市天彭镇三圣南路 76 号。</p>
         <p>联系电话：028–88508088</p>
-        <p><b>乙方（债权受让方）：</b>四川捷艾吉科技有限公司</p>
-        <p>法定代表人:   赖江</p>
-        <p>住所：四川省绵阳市三台县北坝镇会仙路与涪滨路交汇处翡翠滨江9号楼4单元1层4-1-31号</p>
-        <p>联系人： 赖江</p>
-        <p>联系电话：18989293000</p>
+        <p><b>乙方（债权受让方）：</b>${data.capital_name}</p>
+        <p>法定代表人:   ${data.capital_master}</p>
+        <p>住所：${data.capital_address}</p>
+        <p>联系人： ${data.capital_connect_name}</p>
+        <p>联系电话：${data.capital_connect_mobile}</p>
         <p>甲、乙双方依照诚实信用原则，根据相关法律、法规的规定，就甲方向乙方进 行债权转让事宜，达成一致意见，特签订本协议，以资信守。</p>
         <h4>第一条 债权转让的内容</h4>
         <p>1.1 对甲方向合格借款人发放的贷款而形成的债权，乙方自愿受让该债权，双方 据此签署《债权转让确认单》。</p>
@@ -198,15 +229,85 @@ export const zqzrxy = (data) => {
         <div style="height:40px"></div>
         <div style="position: relative;">
           <p>甲方： 成都市彭州仟加源小额贷款有限责任公司</p>
-          <p>签订日期：2025年07月07日</p>
+          <p>签订日期：${data.time}</p>
           <img style="width: 130px;height: 130px; position: absolute; left: 160px;top:-40px" src="http://localhost:5174/src/assets/seal.png" />
         </div>
         <div style="height:60px"></div>
         <div style="position: relative;">
-          <p>乙方：</p>
-          <p>签订日期：2025年07月07日</p>
-          <img style="width: 130px;height: 130px; position: absolute; left: 160px;top:-40px" src="http://localhost:5174/src/assets/seal.png" />
+          <p>乙方：${data.capital_name}</p>
+          <p>签订日期：${data.time}</p>
+          <img style="width: 130px;height: 130px; position: absolute; left: 160px;top:-40px" src="${data.capital_seal}" />
         </div>
+        <br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br />
+        <p>附件：</p>
+        <br /><br /><br />
+        <p style="text-align: center;font-size: 30px;margin-bottom: 30px;font-weight: bold">债权转让确认单</p>
+        <table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%; font-size: 14px; text-align: left;">
+          <tbody>
+            <tr>
+              <td style="width: 20%;padding: 6px 8px;">借款合同编号</td>
+              <td style="width: 30%;padding: 6px 8px;">${data.order_num}</td>
+              <td style="width: 20%;padding: 6px 8px;">债权转让日期</td>
+              <td style="width: 30%;padding: 6px 8px;">${data.time}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px;">债权转让方</td>
+              <td style="padding: 6px 8px;">成都市彭州仟加源小额贷款有限责任公司</td>
+              <td style="padding: 6px 8px;">债权受让方</td>
+              <td style="padding: 6px 8px;">${data.capital_name}</td>
+            </tr>
+            <tr>
+               <td colspan="4" style="text-align: center;padding: 6px 8px;">债务人身份信息</td>
+            </tr>
+            ${data.order_user_messages.map(i => `<tr>
+                <td style="padding: 6px 8px;">姓 名</td>
+                <td style="padding: 6px 8px;">${i.name}</td>
+                <td style="padding: 6px 8px;">身份证号码</td>
+                <td style="padding: 6px 8px;">${i.card_number}</td>
+              </tr>`).join('')}
+            <tr>
+              <td style="padding: 6px 8px;">借款本金</td>
+              <td style="padding: 6px 8px;">${data.pay_price}元</td>
+              <td style="padding: 6px 8px;">人民币大写：</td>
+              <td style="padding: 6px 8px;">${data.dxMoney}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px;">债权转让对价</td>
+              <td style="padding: 6px 8px;">${data.pay_price}元</td>
+              <td style="padding: 6px 8px;">人民币大写：</td>
+              <td style="padding: 6px 8px;">${data.dxMoney}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px;">借款利率</td>
+              <td style="padding: 6px 8px;">${data.loan_rate}%</td>
+              <td style="padding: 6px 8px;">借款到期日</td>
+              <td style="padding: 6px 8px;">${data.end_time}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px;">还款方式</td>
+              <td style="padding: 6px 8px;" colspan="3">${data.repayment_type}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px;" colspan="2">
+                <div>债权转让方：（盖章）</div>
+                <img style="width: 200px;height: 200px;" src="http://localhost:5174/src/assets/seal.png" />
+              </td>
+              <td style="padding: 6px 8px;" colspan="2">
+                <div>债权受让方：（盖章）</div>
+                <img style="width: 200px;height: 200px;" src="${data.capital_seal}" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <br />
+        <p>*本《债权转让确认单》为协议编号【${data.move_num}】的《债权 转让协议》的附件，债权转让方和债权受让方的权利义务以《债权转让协议》的约定为准。</p>
+        <br />
+        <p>*本《债权转让确认单》传真机、扫描件、影印件等均具有同等法律效力，债权 转让方均对该债权信息及债权转让事宜予以认可。</p>
       </div>
       `
     let html = `${title}${info}`
@@ -240,7 +341,7 @@ export const zqzrxy = (data) => {
         pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight)
         heightLeft -= pageHeight
       }
-      pdf.save('转让')
+      pdf.save('债权转让')
       resolve()
       document.body.removeChild(container)
     }).catch(err => {

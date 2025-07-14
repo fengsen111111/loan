@@ -405,14 +405,12 @@ const zqzrCli = async (item) => {
     }
   })
   console.log('转载信息',resule);
-  
-
-  // zqzrxy(item,'').then((res: any) => {
-  //   console.log(res)
-  //   // if (res.url) {
-  //   //   downloadBlob(res.url, '债权转让')
-  //   // }
-  // })
+  zqzrxy(resule.data).then((res: any) => {
+    console.log(res)
+    if (res.url) {
+      downloadBlob(res.url, '债权转让')
+    }
+  })
 
 }
 

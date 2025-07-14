@@ -460,6 +460,7 @@
 		getdeptList()
 		GoodsList()
 	})
+	const getdept = ref([])
 	//获取部门
 	const getdeptList = async () => {
 		try {

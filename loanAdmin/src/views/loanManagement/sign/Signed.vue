@@ -62,7 +62,8 @@
           <a-col :span="8">
             <div style="display: flex; margin-left: 40px">
               <div class="name">进件时间</div>
-              <a-date-picker v-model="queryForm.create_time" @change="search" />
+              <!-- <a-date-picker v-model="queryForm.create_time" @change="search" /> -->
+              <DateRangePicker v-model="renTime" @change="timechange" :show-time="false" format="YYYY-MM-DD" />
             </div>
           </a-col>
           <a-col :span="2">
@@ -148,6 +149,18 @@ const userStore = useUserStore()
 const detailCon = ref()
 const open = ref<boolean>(false)
 const currentToken = userStore.token
+const renTime = ref([])
+function timechange(e) {
+  // console.log('1',e);
+  if(!e){
+			queryForm.start_time = ''
+			queryForm.end_time = ''
+		}else{
+			queryForm.start_time = e[0]
+			queryForm.end_time = e[1]
+		}
+  search()
+}
 const GoodsdxList = ref([
   {
     value: 'person',
@@ -353,6 +366,9 @@ const reset = () => {
   queryForm.name = ''
   queryForm.user_name = ''
   queryForm.user_mobile = ''
+  renTime.value = []
+  queryForm.start_time = ''
+  queryForm.end_time = ''
   search()
 }
 //展开

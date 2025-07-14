@@ -52,19 +52,18 @@
 					<a-col :span="8">
 						<div style="display: flex; margin-left: 40px">
 							<div class="name">进件时间</div>
-							<a-range-picker v-model="create_time" @change="onChange" />
-
+							<!-- <a-range-picker v-model="create_time" @change="onChange" /> -->
+              <DateRangePicker v-model="renTime" @change="timechange" :show-time="false" format="YYYY-MM-DD" />
 						</div>
+					</a-col>
+					<a-col :span="3">
+						<a-button @click="downloadExcel" type="primary">导出excel表格</a-button>
 					</a-col>
 					<a-col :span="2">
 						<a-button @click="reset">重置</a-button>
 					</a-col>
-
 					<div class="btn" @click="expandMore">{{ isExpanded ? '收起' : '展开更多' }}</div>
 				</a-row>
-
-
-
 			</template>
 			<template #status="{ record }">
 				{{
@@ -189,6 +188,18 @@
 	import { isMobile } from '@/utils'
 	import has from '@/utils/has'
 	import { DisEnableStatusList } from '@/constant/common'
+	const renTime = ref([])
+	function timechange(e) {
+		// console.log('1',e);
+		if(!e){
+				queryForm.start_time = ''
+				queryForm.end_time = ''
+			}else{
+				queryForm.start_time = e[0]
+				queryForm.end_time = e[1]
+			}
+		search()
+	}
 	const detailCon = ref()
 	const isExpanded = ref(false) // 控制是否展开
 	const userStore = useUserStore()
@@ -495,6 +506,57 @@
 		link.href = fileUrl;
 		// link.download = 'filename.ext'; // 可选，指定下载的文件名
 		link.click();
+	}
+
+	import { saveAs } from 'file-saver';
+  import * as XLSX from 'xlsx';
+
+	//导出
+	async function downloadExcel() {
+		try {
+			const response = await getOrderPayLogList({
+				post_params: {
+					...queryForm, 
+				}
+			});
+
+			if (response.data.list.length == 0) return Message.error('暂无信息')
+			// 转换数据为二维数组
+			response.data.list = response.data.list.map((item) => {
+				return {
+					contract_num:item.contract_num,
+					name:item.name,
+					mobile:item.mobile,
+					create_time:item.create_time,
+					status:item.status=='a'?'进行中':item.status=='b'?'成功':'失败',
+					price:item.price,
+					all_price:item.all_price,
+					pay_price:item.pay_price,
+					wait_price:item.wait_price,
+				}
+			})
+			const formattedData = response.data.list.map(item => [
+		  	item.contract_num,
+			  item.name,
+				item.mobile,
+				item.create_time,
+				item.status,
+				item.price,
+				item.all_price,
+				item.pay_price,
+				item.wait_price,
+			]);
+
+			const worksheet = XLSX.utils.aoa_to_sheet([[
+				'合同编号', '客户名称', '客户联系电话', '发放时间', '进度','本次发放金额','总金额','累积已发放金额','待发放金额'], ...formattedData]);
+			const workbook = XLSX.utils.book_new();
+			XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+			const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+			const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+			saveAs(blob, '转账记录.xlsx');
+		} catch (error) {
+			console.error('下载失败:', error);
+		}
 	}
 </script>
 

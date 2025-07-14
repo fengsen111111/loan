@@ -62,7 +62,8 @@
           <a-col :span="8">
             <div style="display: flex; margin-left: 40px">
               <div class="name">进件时间</div>
-              <a-date-picker v-model="queryForm.create_time" @change="search" />
+              <!-- <a-date-picker v-model="queryForm.create_time" @change="search" /> -->
+              <DateRangePicker v-model="renTime" @change="timechange" :show-time="false" format="YYYY-MM-DD" />
             </div>
           </a-col>
           <a-col :span="2">
@@ -165,6 +166,18 @@ const dataList1: any = ref([])
 const open = ref<boolean>(false)
 const open1 = ref<boolean>(false)
 const Goods = ref([])
+const renTime = ref([])
+function timechange(e) {
+  // console.log('1',e);
+  if(!e){
+			queryForm.start_time = ''
+			queryForm.end_time = ''
+		}else{
+			queryForm.start_time = e[0]
+			queryForm.end_time = e[1]
+		}
+  search()
+}
 const GoodsdxList = ref([
   {
     value: 'person',
@@ -337,7 +350,7 @@ const num = ref(0)
 const queryForm = reactive({
   status: 'e',
   contract_num: '',
-  create_time: '',
+  // create_time: '',
   check_status: '',
   pay_status: '',
   notarization_status: '',
@@ -404,7 +417,7 @@ const handleOk = () => {
 // 重置
 const reset = () => {
   queryForm.contract_num = ''
-  queryForm.create_time = ''
+  // queryForm.create_time = ''
   queryForm.check_status = ''
   queryForm.pay_status = ''
   queryForm.notarization_status = ''
@@ -414,6 +427,9 @@ const reset = () => {
   queryForm.name = ''
   queryForm.user_name = ''
   queryForm.user_mobile = ''
+  renTime.value = []
+  queryForm.start_time = ''
+  queryForm.end_time = ''
   search()
 }
 //展开

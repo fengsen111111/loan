@@ -158,7 +158,7 @@ const queryForm = reactive<OnlineUserQuery>({
   status: 'f',
   capital_id: '',
   name: '',
-  contract_num: '',
+  contract_num: '', //合同编号
   start_time: loginTime.value.length > 0 ? loginTime.value[0] : '',
   end_time: loginTime.value.length > 0 ? loginTime.value[1] : ''
 })

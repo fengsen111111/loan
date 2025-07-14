@@ -16,8 +16,6 @@
 						<a-link title="转账" @click="showModal(record, true)">转账 </a-link>
 						<a-link title="提现" @click="showModal(record, false)">提现</a-link>
 						<a-link title="交易明细" @click="showModalmx(record)">交易明细 </a-link>
-
-
 					</a-space>
 				</template>
 			</GiTable>
@@ -46,7 +44,19 @@
 						<GiTable row-key="id" :data="dataList2" :columns="columns2"
 							:scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
 							:disabledTools="['fullscreen', 'refresh', 'size', 'setting']">
-
+							<template #custom-left>
+								<a-row class="grid-demo2" :gutter="24">
+									<a-col :span="18">
+										<div style="display: flex; ">
+											<div class="name">进件时间</div>
+											<DateRangePicker v-model="renTime" @change="timechange" :show-time="false" format="YYYY-MM-DD" />
+										</div>
+									</a-col>
+									<a-col :span="3">
+										<a-button @click="downloadExcel" type="primary">导出excel表格</a-button>
+									</a-col>
+								</a-row>
+							</template>
 							<template #status="{ record }">
 								{{ record.status == 'a' ? '转账中' : record.status == 'b' ? '转账成功' : '转账失败' }}
 							</template>
@@ -401,10 +411,12 @@
 		}
 	}
 
+	const checkItem = ref({})
+
 	//明细
 	const showModalmx = (item : any) => {
 		open.value = true
-
+		checkItem.value = item
 		getCapitalWithdrawalList({
 			post_params: {
 				capital_id: item.id
@@ -448,6 +460,72 @@
 
 	const handleSelect = (v) => {
 		console.log(v)
+	}
+
+	// 新增
+	const renTime = ref([])
+	function timechange(e) {
+		// console.log('1',e);
+		if(!e){
+			queryForm.start_time = ''
+			queryForm.end_time = ''
+		}else{
+			queryForm.start_time = e[0]
+			queryForm.end_time = e[1]
+		}
+		
+		getTransferAccountsList({
+			post_params: {
+				capital_id: checkItem.value.id,
+				...queryForm
+			}
+		}).then((res) => {
+			dataList2.value = res.data.list
+		})
+	}
+
+  import { saveAs } from 'file-saver';
+  import * as XLSX from 'xlsx';
+
+	//导出
+	async function downloadExcel() {
+		try {
+			const response = await getTransferAccountsList({
+				post_params: {
+					capital_id: checkItem.value.id,
+					...queryForm
+				}
+			});
+
+			if (response.data.list.length == 0) return Message.error('暂无信息')
+			// 转换数据为二维数组
+			response.data.list = response.data.list.map((item) => {
+				return {
+					create_time:item.create_time,
+					money:item.money,
+					status:item.status=='a'?'转账中':item.status=='b'?'转账成功':'转账失败',
+					reason:item.reason,
+					receipt_status:item.receipt_status == 'a'? '未处理' : item.receipt_status == 'b'? '生成中': item.receipt_status == 'c'? '成功': '不支持'
+				}
+			})
+			const formattedData = response.data.list.map(item => [
+		  	item.create_time,
+			  item.money,
+				item.status,
+				item.reason,
+				item.receipt_status
+			]);
+
+			const worksheet = XLSX.utils.aoa_to_sheet([[
+				'转账发起时间', '转账金额', '转账状态', '转账失败原因', '回执单'], ...formattedData]);
+			const workbook = XLSX.utils.book_new();
+			XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+			const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+			const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+			saveAs(blob, '转账记录.xlsx');
+		} catch (error) {
+			console.error('下载失败:', error);
+		}
 	}
 </script>
 

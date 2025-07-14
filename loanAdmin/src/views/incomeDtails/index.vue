@@ -136,8 +136,13 @@ const queryForm = reactive({
 })
 
 function timechange(e) {
-  queryForm.start_time = e[0]
-  queryForm.end_time = e[1]
+  if(!e){
+			queryForm.start_time = ''
+			queryForm.end_time = ''
+		}else{
+			queryForm.start_time = e[0]
+			queryForm.end_time = e[1]
+		}
   search()
 }
 const {

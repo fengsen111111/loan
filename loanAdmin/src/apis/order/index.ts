@@ -54,6 +54,11 @@ export function submitVerifyCode(query) {
   return http.post(`${BASE_URL}/Capital/submitVerifyCode`, query)
 }
 
+/** @desc 获取连连银行卡账户*/
+export function getLLBankList(query) {
+  return http.post(`${BASE_URL}/User/getLLBankList`, query)
+}
+
 /** @desc 助贷方提现*/
 export function withdrawal(query) {
   return http.post(`${BASE_URL}/Capital/withdrawal`, query)

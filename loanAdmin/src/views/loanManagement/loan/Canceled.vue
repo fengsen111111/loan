@@ -152,6 +152,12 @@
 						</div>
 					</div>
 				</a-col>
+				<a-col :span="24">
+					<div style="display: flex; width: 360px">
+						<span style="width: 190px">绑卡协议号:</span>
+						<a-cascader :options="bankDate" v-model="linked_agrtno" placeholder="请选择银行卡号/账户" />
+					</div>
+				</a-col>
 				<!-- <a-col :span="24">
 					<div style="display: flex; width: 420px">
 						<span style="width: 170px">放款金额</span>
@@ -179,7 +185,7 @@
 </template>
 
 <script setup lang="ts">
-	import { getOrderPayLogList, storeGetOrderDetail, listRole, storeGetGoodsList, withdrawalMoney, getWithdrawalMsg } from '@/apis'
+	import { getOrderPayLogList, storeGetOrderDetail, listRole, storeGetGoodsList, withdrawalMoney, getWithdrawalMsg,getLLBankList } from '@/apis'
 	import { Message } from '@arco-design/web-vue'
 	import type { TableInstanceColumns } from '@/components/GiTable/type'
 	import DateRangePicker from '@/components/DateRangePicker/index.vue'
@@ -243,6 +249,7 @@
 	const txVis = ref(false)
 	const wid_id = ref('')
 	const widMoney = ref('')
+	const linked_agrtno = ref('')
 
 	async function _getWithdrawalMsg(item) {
 		try {
@@ -261,12 +268,31 @@
 		}
 	}
 	function withdrawal(item) {
+		_getLLBankList(item)
 		_getWithdrawalMsg(item)
 		widMoney.value = item.price
 		fieldName.value = item.name
 		wid_id.value = item.id
 		// txVis.value = true
 	}
+
+	const bankDate = ref([])//连连号银行卡列表
+	const _getLLBankList = async (item) =>{
+		const res = await getLLBankList({
+			post_params:{
+				type: 'b',//a助贷方提现b订单交易提现
+				capital_id: '',//助贷方ID
+				order_id: item.order_id,//订单ID
+	  	}
+		})
+		console.log('res连连银行卡账户',res.data.list);
+		bankDate.value = res.data.list.map((iss)=>{
+			return {
+				value: iss.linked_agrtno,
+				label: iss.linked_acctno
+			}
+		})
+  }
 
 	// const interval = ref()
 	// function handleTx() {
@@ -304,6 +330,7 @@
 				post_params: {
 					order_id: wid_id.value,
 					money: widMoney.value,
+					linked_agrtno:linked_agrtno.value
 				}
 			})
 			Message.success('提现成功')
@@ -329,6 +356,7 @@
 	function cancelTx() {
 		widMoney.value = ''
 		wid_id.value = ''
+		linked_agrtno.value = ''
 		fieldName.value = ''
 		txVis.value = false
 		search()

@@ -99,6 +99,12 @@
 						<a-input v-model="Form.money" placeholder="请输入金额" type="number" allow-clear> </a-input>
 					</div>
 				</a-col>
+				<a-col :span="24" v-if="!conter">
+					<div style="display: flex; width: 390px">
+						<span style="width: 160px">绑卡协议号</span>
+						<a-cascader :options="bankDate" v-model="Form.linked_agrtno" placeholder="请选择银行卡号/账户" />
+					</div>
+				</a-col>
 				<a-col :span="24" v-show="conter">
 					<div style="display: flex; width: 430px">
 						<span style="width: 100px">支付密码</span>
@@ -130,7 +136,7 @@
 </template>
 
 <script setup lang="ts">
-	import { getStoreCapitalList, getRandom, getTransferAccountsList, getCapitalWithdrawalList, transferAccounts, withdrawal, submitVerifyCode } from '@/apis'
+	import { getStoreCapitalList, getRandom, getTransferAccountsList, getCapitalWithdrawalList, transferAccounts, withdrawal, submitVerifyCode,getLLBankList } from '@/apis'
 	import { Message } from '@arco-design/web-vue'
 	import type { TableInstanceColumns } from '@/components/GiTable/type'
 	import DateRangePicker from '@/components/DateRangePicker/index.vue'
@@ -180,8 +186,10 @@
 		capital_id: '',
 		money: '',
 		password: '',
-		random_key: ''
+		random_key: '',
+		linked_agrtno:'',//绑卡协议号
 	})
+
 
 	const showModal = (item : any, isshow : boolean) => {
 		conter.value = isshow
@@ -191,6 +199,10 @@
 		CaptRandom(item)
 		document.getElementById('LOGPASS2').value = '';
 		open1.value = true
+		// console.log('item,show',item,isshow);
+		if(conter.value == false){
+			_getLLBankList(item)
+		}
 	}
 
 	function showdownload(item) {
@@ -410,6 +422,24 @@
 			}
 		}
 	}
+
+	const bankDate = ref([])//连连号银行卡列表
+	const _getLLBankList = async (item) =>{
+		const res = await getLLBankList({
+			post_params:{
+				type: 'a',//a助贷方提现b订单交易提现
+				capital_id: item.id,//助贷方ID
+				order_id: '',//订单ID
+	  	}
+		})
+		console.log('res连连银行卡账户',res.data.list);
+		bankDate.value = res.data.list.map((iss)=>{
+			return {
+				value: iss.linked_agrtno,
+				label: iss.linked_acctno
+			}
+		})
+  }
 
 	const checkItem = ref({})
 

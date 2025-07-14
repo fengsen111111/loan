@@ -395,22 +395,24 @@ const showModal1 = async (item) => {
 
 }
 import { zqzrxy } from "@/assets/settle.js"
-const zqzrCli = async (item) => {
+const zqzrCli = (item) => {
   // console.log('债权转让',item);
   const params = new URL(item.detail_url).searchParams
   const orderId = params.get('order_id')
-  let resule = await _getMoveMsg({
+  _getMoveMsg({
     post_params:{
       order_id:orderId
     }
+  }).then((resule)=>{
+    console.log('转载信息',resule);
+    zqzrxy(resule.data).then((res: any) => {
+      console.log(res)
+      // if (res.url) {
+      //   downloadBlob(res.url, '债权转让')
+      // }
+    })
   })
-  console.log('转载信息',resule);
-  zqzrxy(resule.data).then((res: any) => {
-    console.log(res)
-    if (res.url) {
-      downloadBlob(res.url, '债权转让')
-    }
-  })
+  
 
 }
 

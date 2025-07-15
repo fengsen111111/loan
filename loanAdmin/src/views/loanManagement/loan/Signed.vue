@@ -405,15 +405,40 @@ const zqzrCli = (item) => {
     }
   }).then((resule)=>{
     console.log('转载信息',resule);
-    zqzrxy(resule.data).then((res: any) => {
-      console.log(res)
-      // if (res.url) {
-      //   downloadBlob(res.url, '债权转让')
-      // }
-    })
+	let localUrls = []
+	let capital_seal = []
+	convertAllToLocalUrls(resule.data.capital_line_seals).then((urls)=>{
+		localUrls = urls
+		convertAllToLocalUrls([resule.data.capital_seal]).then((urls)=>{
+			capital_seal = urls
+			console.log('本地图片地址:', localUrls,capital_seal)
+			  zqzrxy(resule.data,localUrls,capital_seal).then((res: any) => {
+			    console.log(res)
+			  })
+		})
+	})
   })
-  
-
+}
+async function convertAllToLocalUrls(urls) {
+  const results = []
+  for (const url of urls) {
+    const localUrl = await downloadImageToBlobUrl(url)
+    results.push(localUrl)
+  }
+  return results
+}
+// 下载远程图片转为本地 blob URL
+async function downloadImageToBlobUrl(url) {
+  try {
+    const response = await fetch(url, {
+      mode: 'cors' // 确保服务器允许跨域，否则 fetch 会失败
+    })
+    const blob = await response.blob()
+    return URL.createObjectURL(blob) // 本地可用的 URL
+  } catch (error) {
+    console.error('下载失败:', error)
+    return ''
+  }
 }
 
 //关闭弹窗

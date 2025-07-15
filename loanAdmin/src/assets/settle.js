@@ -1,11 +1,11 @@
 import html2canvas from 'html2canvas'
 const sealImg = new URL('@/assets/seal.png', import.meta.url).href
-
+const yz = new URL('@/assets/zzimg/yz.png', import.meta.url).href
+const one0 = new URL('@/assets/zzimg/one0.png', import.meta.url).href
 const one1 = new URL('@/assets/zzimg/one1.png', import.meta.url).href
 const one2 = new URL('@/assets/zzimg/one2.png', import.meta.url).href
 const one3 = new URL('@/assets/zzimg/one3.png', import.meta.url).href
 const one4 = new URL('@/assets/zzimg/one4.png', import.meta.url).href
-const one5 = new URL('@/assets/zzimg/one5.png', import.meta.url).href
 
 const convertCurrency = (money) => {
   var cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
@@ -168,8 +168,7 @@ function ToString(n) {
 
 import jsPDF from 'jspdf'
 // 债权转让协议
-export const zqzrxy = (data) => {  
-  console.log('数据',data.capital_line_seals);
+export const zqzrxy = (data,urls,capital_seal) => {  
   data.dxMoney = ToString(data.pay_price*1)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -243,14 +242,14 @@ export const zqzrxy = (data) => {
           <p>甲方： 成都市彭州仟加源小额贷款有限责任公司</p>
           <p style="margin-top:40px">签订日期：</p>
           <p style="margin-left:140px">${data.time}</p>
-          <img style="width: 380px;height: 380px; position: absolute; left: 160px;top:-120px" src="${sealImg}" />
+          <img style="width: 246px;height: 246px; position: absolute; left: 224px;top:-60px" src="${yz}" />
         </div>
         <div style="height:100px"></div>
         <div style="position: relative;">
           <p>乙方：${data.capital_name}</p>
           <p style="margin-top:40px">签订日期：</p>
           <p style="margin-left:140px">${data.time}</p>
-          <img style="width: 380px;height: 380px; position: absolute; left: 160px;top:-120px" src="${data.capital_seal}" />
+		  <img style="width: 246px;height: 246px; position: absolute; left: 224px;top:-60px" src="${capital_seal[0]}" />
         </div>
         <br /><br /><br />
         <p style="text-align: center;font-weight:bold;font-size:16px;margin-top:20px">4/5</p>
@@ -305,30 +304,30 @@ export const zqzrxy = (data) => {
             <tr>
               <td style="padding: 20px;position: relative;height:210px" colspan="2">
                 <div style="position: absolute;top:40px;left:50px">债权转让方：（盖章）</div>
-                <img style="width: 380px;height: 380px;position: absolute;top:-60px" src="${sealImg}" />
+                <img style="width: 242px;height: 242px;position: absolute;top:0px;left:40px" src="${yz}" />
               </td>
               <td style="padding: 20px;position: relative;height:210px" colspan="2">
                 <div style="position: absolute;top:40px;left:50px">债权受让方：（盖章）</div>
-                <img style="width: 380px;height: 380px;position: absolute;top:-60px" src="${data.capital_seal}" />
+                <img style="width: 242px;height: 242px;position: absolute;top:0px;left:40px" src="${capital_seal[0]}" />
               </td>
             </tr>
           </tbody>
         </table>
-        <p>*本《债权转让确认单》为协议编号【${data.move_num}】的《债权 转让协议》的附件，债权转让方和债权受让方的权利义务以《债权转让协议》的约定为准。</p>
-        <p>*本《债权转让确认单》传真机、扫描件、影印件等均具有同等法律效力，债权 转让方均对该债权信息及债权转让事宜予以认可。</p>
+        <p>*本《债权转让确认单》为协议编号【${data.move_num}】的《债权转让协议》的附件，债权转让方和债权受让方的权利义务以《债权转让协议》的约定为准。</p>
+        <p>*本《债权转让确认单》传真机、扫描件、影印件等均具有同等法律效力，债权转让方均对该债权信息及债权转让事宜予以认可。</p>
         <div style="font-weight:bold;font-size:16px;width:100%;margin-top:160px">
           <p style="text-align: center;">5/5</p>
         </div>
-        <img style="width: 45px;height: 200px;position: absolute;right:-138px;top:160px" src="${one1}" />
-        <img style="width: 45px;height: 200px;position: absolute;right:-138px;top:560px" crossorigin="anonymous" src="${data.capital_line_seals[0]}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:1660px" src="${one2}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:2100px" crossorigin="anonymous" src="${data.capital_line_seals[1]}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:3100px" src="${one3}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:3600px" crossorigin="anonymous" src="${data.capital_line_seals[2]}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:4600px" src="${one4}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:5100px" crossorigin="anonymous" src="${data.capital_line_seals[3]}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:6160px" src="${one5}" />
-        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:6560px" crossorigin="anonymous" src="${data.capital_line_seals[4]}" />
+        <img style="width: 45px;height: 200px;position: absolute;right:-138px;top:160px" src="${one0}" />
+        <img style="width: 45px;height: 200px;position: absolute;right:-138px;top:560px" crossorigin="anonymous" src="${urls[0]}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:1660px" src="${one1}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:2100px" crossorigin="anonymous" src="${urls[1]}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:3100px" src="${one2}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:3600px" crossorigin="anonymous" src="${urls[2]}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:4600px" src="${one3}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:5100px" crossorigin="anonymous" src="${urls[3]}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:6160px" src="${one4}" />
+        <img style="width: 45px;height: 210px;position: absolute;right:-138px;top:6560px" crossorigin="anonymous" src="${urls[4]}" />
       </div>
       `
     let html = `${title}${info}`

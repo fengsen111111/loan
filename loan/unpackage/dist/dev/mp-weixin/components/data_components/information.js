@@ -55,6 +55,27 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       mobile: "",
       verify_code: ""
     });
+    const handleBlur = async () => {
+      console.log("失去焦点", formData.card_number.length);
+      if (formData.card_number.length == 18) {
+        console.log("长度满足，开始调用接口");
+        const res = await globalProxy.$request("/loan/Order/checkUserLoanMoney", { card_number: formData.card_number });
+        console.log("结果", res.data.message);
+        if (res.data.message) {
+          common_vendor.index.showModal({
+            title: "提示",
+            content: res.data.message,
+            success: function(res2) {
+              if (res2.confirm) {
+                console.log("用户点击确定");
+              } else if (res2.cancel) {
+                console.log("用户点击取消");
+              }
+            }
+          });
+        }
+      }
+    };
     const handleConfirm = (e) => {
       formData.id_card_end_time = e.startDate + " - " + e.endDate;
       state.calenderShow = false;
@@ -223,94 +244,95 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         i: formData.name,
         j: common_vendor.o(($event) => formData.name = $event.detail.value),
         k: props.showFlag,
-        l: formData.card_number,
-        m: common_vendor.o(($event) => formData.card_number = $event.detail.value),
-        n: props.showFlag,
-        o: formData.id_card_address,
-        p: common_vendor.o(($event) => formData.id_card_address = $event.detail.value),
-        q: common_vendor.t(formData.id_card_end_time || "请选择证件有效期"),
-        r: common_vendor.s(formData.id_card_end_time ? "" : "color:#777777"),
-        s: common_vendor.o(() => {
+        l: common_vendor.o(handleBlur),
+        m: formData.card_number,
+        n: common_vendor.o(($event) => formData.card_number = $event.detail.value),
+        o: props.showFlag,
+        p: formData.id_card_address,
+        q: common_vendor.o(($event) => formData.id_card_address = $event.detail.value),
+        r: common_vendor.t(formData.id_card_end_time || "请选择证件有效期"),
+        s: common_vendor.s(formData.id_card_end_time ? "" : "color:#777777"),
+        t: common_vendor.o(() => {
           props.showFlag ? "" : state.calenderShow = true;
         }),
-        t: common_vendor.p({
+        v: common_vendor.p({
           name: "Y",
           label: "开通",
           labelSize: "3.2vw"
         }),
-        v: common_vendor.p({
+        w: common_vendor.p({
           name: "N",
           label: "不开通",
           labelSize: "3.2vw"
         }),
-        w: common_vendor.o(($event) => formData.open_ll_status = $event),
-        x: common_vendor.p({
+        x: common_vendor.o(($event) => formData.open_ll_status = $event),
+        y: common_vendor.p({
           shape: "circle",
           activeColor: "#F97E39",
           disabled: props.showFlag,
           modelValue: formData.open_ll_status
         }),
-        y: formData.open_ll_status === "Y"
+        z: formData.open_ll_status === "Y"
       }, formData.open_ll_status === "Y" ? {
-        z: common_vendor.p({
+        A: common_vendor.p({
           name: "INNERUSER",
           label: "个人用户",
           labelSize: "3.2vw"
         }),
-        A: common_vendor.p({
+        B: common_vendor.p({
           name: "INNERCOMPANY",
           label: "企业用户",
           labelSize: "3.2vw"
         }),
-        B: common_vendor.o(($event) => formData.ll_user_type = $event),
-        C: common_vendor.p({
+        C: common_vendor.o(($event) => formData.ll_user_type = $event),
+        D: common_vendor.p({
           shape: "circle",
           activeColor: "#F97E39",
           disabled: props.showFlag,
           modelValue: formData.ll_user_type
         })
       } : {}, {
-        D: formData.open_ll_status === "Y"
+        E: formData.open_ll_status === "Y"
       }, formData.open_ll_status === "Y" ? {
-        E: props.showFlag,
-        F: formData.ll_bank_acctname,
-        G: common_vendor.o(($event) => formData.ll_bank_acctname = $event.detail.value)
+        F: props.showFlag,
+        G: formData.ll_bank_acctname,
+        H: common_vendor.o(($event) => formData.ll_bank_acctname = $event.detail.value)
       } : {}, {
-        H: formData.open_ll_status === "Y"
+        I: formData.open_ll_status === "Y"
       }, formData.open_ll_status === "Y" ? {
-        I: props.showFlag,
-        J: formData.ll_bank_card_number,
-        K: common_vendor.o(($event) => formData.ll_bank_card_number = $event.detail.value)
+        J: props.showFlag,
+        K: formData.ll_bank_card_number,
+        L: common_vendor.o(($event) => formData.ll_bank_card_number = $event.detail.value)
       } : {}, {
-        L: props.showFlag,
-        M: formData.mobile,
-        N: common_vendor.o(($event) => formData.mobile = $event.detail.value),
-        O: !props.showFlag
+        M: props.showFlag,
+        N: formData.mobile,
+        O: common_vendor.o(($event) => formData.mobile = $event.detail.value),
+        P: !props.showFlag
       }, !props.showFlag ? {
-        P: common_vendor.p({
+        Q: common_vendor.p({
           name: 1,
           shape: "circle",
           activeColor: "#F97E39"
         }),
-        Q: common_vendor.o(($event) => _ctx.$navigateTo("/pages/rich_text/index", {
+        R: common_vendor.o(($event) => _ctx.$navigateTo("/pages/rich_text/index", {
           url: "/loan/Setting/getUserProtocol"
         })),
-        R: common_vendor.o(($event) => state.checked = $event),
-        S: common_vendor.p({
+        S: common_vendor.o(($event) => state.checked = $event),
+        T: common_vendor.p({
           modelValue: state.checked
         })
       } : {}, {
-        T: !props.showFlag && state.botShow
+        U: !props.showFlag && state.botShow
       }, !props.showFlag && state.botShow ? {
-        U: common_vendor.o(($event) => nextStep())
+        V: common_vendor.o(($event) => nextStep())
       } : {}, {
-        V: state.tips_popup
+        W: state.tips_popup
       }, state.tips_popup ? {
-        W: common_vendor.t(state.tipsText)
+        X: common_vendor.t(state.tipsText)
       } : {}, {
-        X: common_vendor.o(handleConfirm),
-        Y: common_vendor.o(($event) => state.calenderShow = false),
-        Z: common_vendor.p({
+        Y: common_vendor.o(handleConfirm),
+        Z: common_vendor.o(($event) => state.calenderShow = false),
+        aa: common_vendor.p({
           visible: state.calenderShow,
           isRange: true,
           idCard: true

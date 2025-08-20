@@ -43,7 +43,7 @@
 				<view class="label">身份证号码</view>
 				<view class="value">
 					<input type="idcard" placeholder="请输入身份证号" v-model="formData.card_number" :disabled="props.showFlag"
-						style="width: 100%;">
+						style="width: 100%;" @blur="handleBlur">
 				</view>
 			</view>
 			<view class="info_item">
@@ -171,6 +171,29 @@
 		verify_code: ""
 	}) as any
 
+	const handleBlur = async () => {
+		console.log('失去焦点',formData.card_number.length);
+		if (formData.card_number.length == 18) {
+			console.log('长度满足，开始调用接口');
+			const res = await globalProxy.$request("/loan/Order/checkUserLoanMoney", { card_number: formData.card_number });
+			console.log('结果',res.data.message);
+			if(res.data.message){
+				uni.showModal({
+				  title: '提示',
+				  content: res.data.message,
+				  success: function (res) {
+				    if (res.confirm) {
+				      console.log('用户点击确定');
+				      // 执行确定逻辑
+				    } else if (res.cancel) {
+				      console.log('用户点击取消');
+				      // 执行取消逻辑
+				    }
+				  }
+				});
+			}
+		}
+	}
 
 	const sendCode = async () => {
 		if (formData.mobile === "") {

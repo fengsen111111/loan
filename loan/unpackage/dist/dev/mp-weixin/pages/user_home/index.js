@@ -92,7 +92,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         j: common_vendor.f(state.notice, (item, index, i0) => {
           return {
             a: common_vendor.t(item.title),
-            b: "dc0f6d62-1-" + i0,
+            b: "e8545ed0-1-" + i0,
             c: index,
             d: common_vendor.o(($event) => changeState(item.id), index)
           };

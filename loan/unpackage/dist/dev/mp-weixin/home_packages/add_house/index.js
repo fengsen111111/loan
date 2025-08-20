@@ -319,7 +319,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return common_vendor.e({
             a: common_vendor.t(i.name),
             b: common_vendor.o(($event) => deleteInfo(j), j),
-            c: "8a468c72-6-" + i0,
+            c: "34722fe0-6-" + i0,
             d: j === 0
           }, j === 0 ? {
             e: common_assets._imports_0$4,
@@ -343,7 +343,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return common_vendor.e({
             a: common_vendor.t(i.name),
             b: common_vendor.o(($event) => deleteInfoTwo(j), j),
-            c: "8a468c72-7-" + i0,
+            c: "34722fe0-7-" + i0,
             d: j === 0
           }, j === 0 ? {
             e: common_assets._imports_0$4,
@@ -376,7 +376,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, state.tips_popup ? {
         T: common_vendor.t(state.tipsText)
       } : {}, {
-        U: common_vendor.sr(uPickerRef, "8a468c72-9", {
+        U: common_vendor.sr(uPickerRef, "34722fe0-9", {
           "k": "uPickerRef"
         }),
         V: common_vendor.o(confirm),

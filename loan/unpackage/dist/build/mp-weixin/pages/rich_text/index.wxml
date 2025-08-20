@@ -1,1 +1,1 @@
-<view class="content data-v-cf6b66a5"><u-parse wx:if="{{a}}" class="html_content data-v-cf6b66a5" u-i="cf6b66a5-0" bind:__l="__l" u-p="{{a}}"></u-parse></view>
+<view class="content data-v-f208b508"><u-parse wx:if="{{a}}" class="html_content data-v-f208b508" u-i="f208b508-0" bind:__l="__l" u-p="{{a}}"></u-parse></view>

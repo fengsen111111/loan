@@ -73,7 +73,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: item.icon,
             b: common_vendor.t(item.title),
-            c: "53bf3b42-1-" + i0,
+            c: "52604cce-1-" + i0,
             d: common_vendor.o(($event) => jump(item.path), index),
             e: index
           };

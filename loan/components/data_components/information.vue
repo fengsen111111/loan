@@ -362,6 +362,7 @@
 								formData.card_number = scanData.num;
 								formData.id_card_address = scanData.address;
 
+                                handleBlur()//身份证号有了，调用接口
 								// 
 								// if (formData.open_ll_status === 'Y') {
 								formData.ll_bank_acctname = scanData.name;

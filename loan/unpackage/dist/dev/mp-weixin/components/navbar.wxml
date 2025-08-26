@@ -1,1 +1,1 @@
-<view class="navbar" style="{{'padding-top:' + d + ';' + ('height:' + e)}}"><u-icon wx:if="{{b}}" bindclick="{{a}}" u-i="aa258e14-0" bind:__l="__l" u-p="{{b}}"></u-icon> {{c}} <view style="width:5vw"></view></view>
+<view class="navbar" style="{{'padding-top:' + d + ';' + ('height:' + e)}}"><u-icon wx:if="{{b}}" bindclick="{{a}}" u-i="b4992318-0" bind:__l="__l" u-p="{{b}}"></u-icon> {{c}} <view style="width:5vw"></view></view>

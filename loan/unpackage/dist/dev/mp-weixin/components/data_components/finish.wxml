@@ -1,1 +1,1 @@
-<view class="finish"><view class="content"><image src="{{a}}" mode=""></image><view class="title">进件成功</view> 订单已生成，请联系专属客户经理进行提款操作 </view><option-bt wx:if="{{c}}" bindconfirm="{{b}}" u-i="332dadbd-0" bind:__l="__l" u-p="{{c}}"></option-bt></view>
+<view class="finish"><view class="content"><image src="{{a}}" mode=""></image><view class="title">进件成功</view> 订单已生成，请联系专属客户经理进行提款操作 </view><option-bt wx:if="{{c}}" bindconfirm="{{b}}" u-i="7ef5b18a-0" bind:__l="__l" u-p="{{c}}"></option-bt></view>

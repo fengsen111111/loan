@@ -190,6 +190,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
                   formData.name = scanData.name;
                   formData.card_number = scanData.num;
                   formData.id_card_address = scanData.address;
+                  handleBlur();
                   formData.ll_bank_acctname = scanData.name;
                   formData.ll_bank_card_number = scanData.num;
                 },

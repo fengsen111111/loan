@@ -291,7 +291,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: item,
             b: common_vendor.o(($event) => preImg(item), index)
           }, !props.showFlag ? {
-            c: "0adabe04-0-" + i0,
+            c: "215debc6-0-" + i0,
             d: common_vendor.p({
               name: "close-circle",
               size: "20px",
@@ -312,7 +312,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: item,
             b: common_vendor.o(($event) => preImg(item), index)
           }, !props.showFlag ? {
-            c: "0adabe04-1-" + i0,
+            c: "215debc6-1-" + i0,
             d: common_vendor.p({
               name: "close-circle",
               size: "20px",
@@ -333,7 +333,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: item,
             b: common_vendor.o(($event) => preImg(item), index)
           }, !props.showFlag ? {
-            c: "0adabe04-2-" + i0,
+            c: "215debc6-2-" + i0,
             d: common_vendor.p({
               name: "close-circle",
               size: "20px",
@@ -354,7 +354,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: item,
             b: common_vendor.o(($event) => preImg(item), index)
           }, !props.showFlag ? {
-            c: "0adabe04-3-" + i0,
+            c: "215debc6-3-" + i0,
             d: common_vendor.p({
               name: "close-circle",
               size: "20px",

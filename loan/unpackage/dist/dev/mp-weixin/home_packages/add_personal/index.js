@@ -292,7 +292,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, state.tips_popup ? {
         G: common_vendor.t(state.tipsText)
       } : {}, {
-        H: common_vendor.sr(uPickerRef, "d11a6134-5", {
+        H: common_vendor.sr(uPickerRef, "30a72e28-5", {
           "k": "uPickerRef"
         }),
         I: common_vendor.o(confirm),

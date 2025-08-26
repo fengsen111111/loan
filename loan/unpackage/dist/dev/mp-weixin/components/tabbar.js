@@ -115,7 +115,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             a: item.selectedIconPath,
             b: item.iconPath,
             c: index,
-            d: "470e5e44-1-" + i0 + ",470e5e44-0",
+            d: "41d493c2-1-" + i0 + ",41d493c2-0",
             e: common_vendor.p({
               text: item.text
             })

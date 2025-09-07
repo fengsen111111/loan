@@ -108,6 +108,11 @@ export function getStorePriceLogList(query) {
 export function badOrder(query) {
   return http.post(`${BASE_URL}/Order/badOrder`, query)
 }
+/** @desc 获取签约链接 */
+export function getHtmlUrl(query) {
+  return http.post(`${BASE_URL}/Order/getHtmlUrl`, query)
+}
+
 
 /** @desc 恢复 */
 export function reBadOrder(query) {

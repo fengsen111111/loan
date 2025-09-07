@@ -40,7 +40,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/home',
-        name: 'Home',
+        name: 'HomeIndex',
         component: () => import('@/views/home/index.vue'),
         meta: { title: '首页', icon: 'home', affix: true, hidden: false }
       }
